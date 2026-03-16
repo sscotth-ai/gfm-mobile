@@ -84,6 +84,9 @@ importers:
       globals:
         specifier: ^17.4.0
         version: 17.4.0
+      msw:
+        specifier: ^2.12.11
+        version: 2.12.11(@types/node@24.12.0)(typescript@5.9.3)
       oxfmt:
         specifier: ^0.41.0
         version: 0.41.0

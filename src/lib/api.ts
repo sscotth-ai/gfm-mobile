@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import type { Campaign } from "@/types";
-import mockData from "@/data/mock.json";
 
-export function useCampaign(_slug: string) {
+export function useCampaign(slug: string) {
   return useQuery<Campaign>({
-    queryKey: ["campaign", _slug],
+    queryKey: ["campaign", slug],
     queryFn: async () => {
-      // Simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      return mockData.campaign as Campaign;
+      const res = await fetch(`/api/campaigns/${slug}`);
+      if (!res.ok) throw new Error("Campaign not found");
+      return res.json();
     },
+    enabled: !!slug,
   });
 }
