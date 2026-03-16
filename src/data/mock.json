@@ -1,0 +1,228 @@
+{
+  "campaign": {
+    "id": "camp_r5jkk_wildfire_safety",
+    "slug": "realtime-alerts-for-wildfire-safety-r5jkk",
+    "title": "Real-Time Alerts for Wildfire Safety",
+    "description": "<p>Wildfires are becoming more frequent and more destructive every year. In California alone, millions of people live in fire-prone areas, and the difference between safety and disaster can come down to minutes — sometimes seconds — of warning.</p><p><strong>Watch Duty</strong> is a nonprofit organization that provides free, real-time wildfire alerts to communities across the Western United States. Unlike government alert systems that can be slow or overly broad, Watch Duty uses a network of <em>trained, real firefighters and first responders</em> who monitor fire activity around the clock and push hyper-local notifications directly to your phone.</p><p>Since launching, Watch Duty has delivered over <strong>50 million alerts</strong> and helped countless families evacuate safely. Their reporting is trusted by fire departments, emergency managers, and everyday people who depend on accurate, timely information when it matters most.</p><h3>Why We're Fundraising</h3><p>Watch Duty runs entirely on donations — no ads, no paywalls, no data selling. Every dollar goes toward keeping the platform running: server infrastructure, firefighter stipends for overnight monitoring shifts, and expanding coverage to new at-risk regions.</p><p>Our goal is to raise <strong>$3,000</strong> to directly support Watch Duty's operations during the upcoming fire season. Here's how your donation helps:</p><ul><li><strong>$25</strong> — Covers one hour of a trained monitor's shift</li><li><strong>$100</strong> — Funds server costs for a day of real-time alerting</li><li><strong>$500</strong> — Sponsors monitoring expansion into a new county</li></ul><h3>This Is Personal</h3><p>I started this fundraiser after my own neighborhood in Los Altos received a Watch Duty alert about a brush fire just two miles away. That alert gave my family the time we needed to prepare — pack essentials, check on elderly neighbors, and have an evacuation plan ready. The fire was contained, but the peace of mind was invaluable.</p><p>Please consider donating and sharing this campaign. Every contribution, no matter the size, brings us closer to a future where no one is caught off guard by a wildfire. Together, we can keep our communities safe.</p>",
+    "category": "Community & Neighbors",
+    "goalAmount": 3000,
+    "raisedAmount": 2102,
+    "donationCount": 21,
+    "createdAt": "2026-02-14T08:00:00Z",
+    "images": [
+      {
+        "id": "img_001",
+        "url": "/images/wildfire-hero.jpg",
+        "alt": "Aerial view of a wildfire approaching a residential community at dusk",
+        "isPrimary": true
+      },
+      {
+        "id": "img_002",
+        "url": "/images/watch-duty-app.jpg",
+        "alt": "Watch Duty mobile app showing real-time fire perimeter map with alert notifications",
+        "isPrimary": false
+      },
+      {
+        "id": "img_003",
+        "url": "/images/firefighter-monitoring.jpg",
+        "alt": "A Watch Duty volunteer firefighter monitoring multiple screens in a dispatch center",
+        "isPrimary": false
+      },
+      {
+        "id": "img_004",
+        "url": "/images/community-evacuation.jpg",
+        "alt": "Neighbors helping each other evacuate during a wildfire warning in a California suburb",
+        "isPrimary": false
+      }
+    ],
+    "organizer": {
+      "id": "user_janahan_001",
+      "username": "janahan",
+      "displayName": "Janahan Vivekanandan",
+      "avatarUrl": "/images/avatars/janahan.jpg",
+      "location": "Los Altos, CA",
+      "bio": "Software engineer and community advocate passionate about using technology to keep people safe. Longtime volunteer with local emergency preparedness groups in the Bay Area.",
+      "fundraisersOrganized": 3,
+      "followers": 92,
+      "following": 47,
+      "createdAt": "2024-06-10T12:00:00Z"
+    },
+    "beneficiary": {
+      "id": "org_watch_duty_001",
+      "name": "Watch Duty",
+      "description": "Watch Duty is a 501(c)(3) nonprofit providing free, real-time wildfire alerts powered by trained firefighters and first responders. Donations are tax-deductible.",
+      "isVerified": true,
+      "isNonprofit": true,
+      "logoUrl": "/images/watch-duty-logo.png",
+      "website": "https://www.watchduty.org"
+    },
+    "donations": [
+      {
+        "id": "don_001",
+        "donorName": "Priya Raghavan",
+        "donorAvatarUrl": "/images/avatars/priya.jpg",
+        "amount": 500,
+        "message": "Watch Duty saved our family during the 2025 fires. We owe them everything. Please keep doing this incredible work.",
+        "createdAt": "2026-03-15T14:22:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_002",
+        "donorName": "Anonymous",
+        "donorAvatarUrl": null,
+        "amount": 250,
+        "message": null,
+        "createdAt": "2026-03-14T09:45:00Z",
+        "isAnonymous": true
+      },
+      {
+        "id": "don_003",
+        "donorName": "Marcus Chen",
+        "donorAvatarUrl": "/images/avatars/marcus.jpg",
+        "amount": 100,
+        "message": "Great cause, Janahan. Sharing with my whole neighborhood group.",
+        "createdAt": "2026-03-13T18:30:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_004",
+        "donorName": "Sarah Lindqvist",
+        "donorAvatarUrl": null,
+        "amount": 75,
+        "message": "Every second counts in a wildfire. Thank you for supporting the people who give us those seconds.",
+        "createdAt": "2026-03-12T11:15:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_005",
+        "donorName": "David Okonkwo",
+        "donorAvatarUrl": "/images/avatars/david.jpg",
+        "amount": 200,
+        "message": null,
+        "createdAt": "2026-03-10T20:05:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_006",
+        "donorName": "Anonymous",
+        "donorAvatarUrl": null,
+        "amount": 50,
+        "message": "Stay safe everyone.",
+        "createdAt": "2026-03-09T07:30:00Z",
+        "isAnonymous": true
+      },
+      {
+        "id": "don_007",
+        "donorName": "Elena Vasquez",
+        "donorAvatarUrl": "/images/avatars/elena.jpg",
+        "amount": 150,
+        "message": "My parents live in Napa. Watch Duty is the only app I trust to keep them informed. Donating gladly.",
+        "createdAt": "2026-03-07T16:48:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_008",
+        "donorName": "Tom Brennan",
+        "donorAvatarUrl": null,
+        "amount": 25,
+        "message": null,
+        "createdAt": "2026-03-05T13:12:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_009",
+        "donorName": "Aisha Patel",
+        "donorAvatarUrl": "/images/avatars/aisha.jpg",
+        "amount": 300,
+        "message": "As a first responder myself, I know how critical real-time info is. Watch Duty does it right.",
+        "createdAt": "2026-03-03T22:00:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_010",
+        "donorName": "Anonymous",
+        "donorAvatarUrl": null,
+        "amount": 17,
+        "message": null,
+        "createdAt": "2026-02-28T10:33:00Z",
+        "isAnonymous": true
+      },
+      {
+        "id": "don_011",
+        "donorName": "Kevin Nakamura",
+        "donorAvatarUrl": "/images/avatars/kevin.jpg",
+        "amount": 60,
+        "message": "Janahan told me about this at work — happy to chip in. Let's hit that goal!",
+        "createdAt": "2026-02-25T15:20:00Z",
+        "isAnonymous": false
+      },
+      {
+        "id": "don_012",
+        "donorName": "Rachel Kim",
+        "donorAvatarUrl": null,
+        "amount": 375,
+        "message": "Matching my company's donation. Wildfire preparedness matters more than ever with climate change accelerating.",
+        "createdAt": "2026-02-18T08:45:00Z",
+        "isAnonymous": false
+      }
+    ],
+    "comments": [
+      {
+        "id": "com_001",
+        "authorName": "Priya Raghavan",
+        "authorAvatarUrl": "/images/avatars/priya.jpg",
+        "message": "We evacuated with 20 minutes to spare last October because of a Watch Duty alert. Without it, we would have been caught completely off guard. This nonprofit deserves every penny.",
+        "createdAt": "2026-03-15T14:30:00Z"
+      },
+      {
+        "id": "com_002",
+        "authorName": "Marcus Chen",
+        "authorAvatarUrl": "/images/avatars/marcus.jpg",
+        "message": "Just shared this with our Nextdoor group. Everyone in fire country should know about Watch Duty. Great fundraiser, Janahan!",
+        "createdAt": "2026-03-13T18:45:00Z"
+      },
+      {
+        "id": "com_003",
+        "authorName": "Janahan Vivekanandan",
+        "authorAvatarUrl": "/images/avatars/janahan.jpg",
+        "message": "Thank you all so much for the support! We're over 70% of the way to our goal. Every share helps just as much as every dollar.",
+        "createdAt": "2026-03-11T09:00:00Z"
+      },
+      {
+        "id": "com_004",
+        "authorName": "Elena Vasquez",
+        "authorAvatarUrl": "/images/avatars/elena.jpg",
+        "message": "The fact that real firefighters are the ones monitoring and sending alerts is what makes Watch Duty different from everything else out there. It's not an algorithm — it's human expertise.",
+        "createdAt": "2026-03-07T17:00:00Z"
+      },
+      {
+        "id": "com_005",
+        "authorName": "Aisha Patel",
+        "authorAvatarUrl": "/images/avatars/aisha.jpg",
+        "message": "I work in emergency services and I can confirm: Watch Duty's alerts are often faster and more accurate than official channels. They're filling a gap that desperately needed filling.",
+        "createdAt": "2026-03-03T22:15:00Z"
+      },
+      {
+        "id": "com_006",
+        "authorName": "Kevin Nakamura",
+        "authorAvatarUrl": "/images/avatars/kevin.jpg",
+        "message": "Just installed the app after donating. The level of detail on fire perimeters is incredible. Why isn't this more well-known?",
+        "createdAt": "2026-02-25T15:35:00Z"
+      },
+      {
+        "id": "com_007",
+        "authorName": "Rachel Kim",
+        "authorAvatarUrl": null,
+        "message": "My company matched my donation! If your employer has a matching program, check if Watch Duty qualifies — they're a registered 501(c)(3).",
+        "createdAt": "2026-02-18T09:00:00Z"
+      },
+      {
+        "id": "com_008",
+        "authorName": "Tom Brennan",
+        "authorAvatarUrl": null,
+        "message": "Small donation but sending love from Oregon. We deal with fire season up here too and I wish Watch Duty covered our area. Hopefully this helps them expand.",
+        "createdAt": "2026-02-16T14:00:00Z"
+      }
+    ]
+  }
+}
