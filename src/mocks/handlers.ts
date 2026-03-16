@@ -65,8 +65,17 @@ export const handlers = [
   }),
 
   // Get community
-  http.get("/api/communities/:slug", async () => {
+  http.get("/api/communities/:slug", async ({ params }) => {
     await delay(300);
-    return HttpResponse.json(mockData.campaign.beneficiary);
+
+    const { slug } = params;
+    if (slug !== mockData.community.slug) {
+      return HttpResponse.json(
+        { error: "Community not found" },
+        { status: 404 },
+      );
+    }
+
+    return HttpResponse.json(mockData.community);
   }),
 ];

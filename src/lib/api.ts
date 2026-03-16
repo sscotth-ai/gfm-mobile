@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Campaign } from "@/types";
+import type { Campaign, Community } from "@/types";
 
 export function useCampaign(slug: string) {
   return useQuery<Campaign>({
@@ -7,6 +7,18 @@ export function useCampaign(slug: string) {
     queryFn: async () => {
       const res = await fetch(`/api/campaigns/${slug}`);
       if (!res.ok) throw new Error("Campaign not found");
+      return res.json();
+    },
+    enabled: !!slug,
+  });
+}
+
+export function useCommunity(slug: string) {
+  return useQuery<Community>({
+    queryKey: ["community", slug],
+    queryFn: async () => {
+      const res = await fetch(`/api/communities/${slug}`);
+      if (!res.ok) throw new Error("Community not found");
       return res.json();
     },
     enabled: !!slug,
