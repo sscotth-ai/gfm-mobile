@@ -1,12 +1,15 @@
 {
-  "name": "gfm-scaffold",
+  "name": "donate-with-friends",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "oxlint ./src",
+    "lint:eslint": "eslint .",
+    "format": "oxfmt ./src",
+    "format:check": "oxfmt --check ./src",
     "preview": "vite preview"
   },
   "dependencies": {
