@@ -224,5 +224,133 @@
         "createdAt": "2026-02-16T14:00:00Z"
       }
     ]
+  },
+  "community": {
+    "id": "comm_watch_duty",
+    "slug": "watch-duty",
+    "name": "Watch Duty",
+    "description": "<p><strong>Watch Duty</strong> is a 501(c)(3) nonprofit providing free, real-time wildfire alerts to communities across the Western United States. Our service is powered by a network of trained, active and retired firefighters, dispatchers, and first responders who monitor fire activity around the clock.</p><p>Since launching, we've delivered over <strong>50 million alerts</strong> and helped countless families evacuate safely. Our reporting is trusted by fire departments, emergency managers, and everyday people who depend on accurate, timely information when it matters most.</p><h3>Our Mission</h3><p>We believe everyone deserves access to life-saving wildfire information — regardless of where they live or what they can afford. Watch Duty will always be free, ad-free, and community-supported.</p><h3>How We Work</h3><ul><li><strong>Real firefighters</strong> — not algorithms — monitor fire activity 24/7</li><li><strong>Hyper-local alerts</strong> pushed directly to your phone in seconds</li><li><strong>Live fire maps</strong> with perimeter data updated in real time</li><li><strong>Community reporting</strong> lets neighbors help neighbors stay informed</li></ul><p>Every dollar raised through our community goes directly toward keeping monitors staffed, servers running, and coverage expanding to new at-risk regions.</p>",
+    "tagline": "Stay Informed. Stay Safe. Stay Ready.",
+    "logoUrl": "/images/watch-duty-logo.png",
+    "bannerUrl": "/images/watch-duty-banner.jpg",
+    "website": "https://www.watchduty.org",
+    "isVerified": true,
+    "isNonprofit": true,
+    "location": "California, United States",
+    "createdAt": "2024-03-01T00:00:00Z",
+    "stats": {
+      "totalRaised": 39200,
+      "totalDonations": 496,
+      "fundraiserCount": 167,
+      "followerCount": 63
+    },
+    "campaigns": [
+      {
+        "id": "camp_r5jkk_wildfire_safety",
+        "slug": "realtime-alerts-for-wildfire-safety-r5jkk",
+        "title": "Real-Time Alerts for Wildfire Safety",
+        "imageUrl": "/images/wildfire-hero.jpg",
+        "organizerName": "Janahan Vivekanandan",
+        "raisedAmount": 2102,
+        "goalAmount": 3000,
+        "donationCount": 21,
+        "createdAt": "2026-02-14T08:00:00Z"
+      },
+      {
+        "id": "camp_cadogan_fire_monitor",
+        "slug": "fire-monitor-expansion-norcal",
+        "title": "Fire Monitor Expansion — Northern California",
+        "imageUrl": "/images/fire-monitor.jpg",
+        "organizerName": "Tim Cadogan",
+        "raisedAmount": 16344,
+        "goalAmount": 20000,
+        "donationCount": 187,
+        "createdAt": "2025-11-02T00:00:00Z"
+      },
+      {
+        "id": "camp_katz_alert_infra",
+        "slug": "wildfire-alert-infrastructure-upgrade",
+        "title": "Wildfire Alert Infrastructure Upgrade",
+        "imageUrl": "/images/alert-infra.jpg",
+        "organizerName": "Arnie Katz",
+        "raisedAmount": 4892,
+        "goalAmount": 5000,
+        "donationCount": 62,
+        "createdAt": "2026-01-10T00:00:00Z"
+      },
+      {
+        "id": "camp_chen_community_prep",
+        "slug": "community-fire-preparedness-workshop",
+        "title": "Community Fire Preparedness Workshop Series",
+        "imageUrl": "/images/workshop.jpg",
+        "organizerName": "Lisa Chen",
+        "raisedAmount": 3450,
+        "goalAmount": 5000,
+        "donationCount": 48,
+        "createdAt": "2026-01-25T00:00:00Z"
+      },
+      {
+        "id": "camp_reeves_evac",
+        "slug": "evacuation-route-mapping-project",
+        "title": "Evacuation Route Mapping Project",
+        "imageUrl": "/images/evac-mapping.jpg",
+        "organizerName": "Marcus Reeves",
+        "raisedAmount": 7820,
+        "goalAmount": 10000,
+        "donationCount": 91,
+        "createdAt": "2025-12-15T00:00:00Z"
+      },
+      {
+        "id": "camp_oconnor_rural",
+        "slug": "rural-fire-alert-coverage",
+        "title": "Rural Fire Alert Coverage for Mendocino County",
+        "imageUrl": "/images/rural-coverage.jpg",
+        "organizerName": "Sienna O'Connor",
+        "raisedAmount": 1890,
+        "goalAmount": 3000,
+        "donationCount": 29,
+        "createdAt": "2026-03-01T00:00:00Z"
+      },
+      {
+        "id": "camp_tanaka_school",
+        "slug": "school-fire-safety-education",
+        "title": "School Fire Safety Education Program",
+        "imageUrl": "/images/school-safety.jpg",
+        "organizerName": "Kenji Tanaka",
+        "raisedAmount": 2702,
+        "goalAmount": 4000,
+        "donationCount": 58,
+        "createdAt": "2026-02-20T00:00:00Z"
+      }
+    ],
+    "topFundraisers": [
+      {
+        "rank": 1,
+        "organizerName": "Tim Cadogan",
+        "organizerAvatarUrl": null,
+        "organizerUsername": "timcadogan",
+        "campaignTitle": "Fire Monitor Expansion — Northern California",
+        "campaignSlug": "fire-monitor-expansion-norcal",
+        "raisedAmount": 16344
+      },
+      {
+        "rank": 2,
+        "organizerName": "Arnie Katz",
+        "organizerAvatarUrl": null,
+        "organizerUsername": "arniekatz",
+        "campaignTitle": "Wildfire Alert Infrastructure Upgrade",
+        "campaignSlug": "wildfire-alert-infrastructure-upgrade",
+        "raisedAmount": 4892
+      },
+      {
+        "rank": 3,
+        "organizerName": "Janahan Vivekanandan",
+        "organizerAvatarUrl": null,
+        "organizerUsername": "janahan",
+        "campaignTitle": "Real-Time Alerts for Wildfire Safety",
+        "campaignSlug": "realtime-alerts-for-wildfire-safety-r5jkk",
+        "raisedAmount": 2102
+      }
+    ]
   }
 }

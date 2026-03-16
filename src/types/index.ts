@@ -62,3 +62,50 @@ export type Comment = {
   message: string;
   createdAt: string;
 };
+
+export type Community = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string; // HTML
+  tagline: string;
+  logoUrl: string;
+  bannerUrl: string;
+  website: string;
+  isVerified: boolean;
+  isNonprofit: boolean;
+  location: string;
+  createdAt: string;
+  stats: CommunityStats;
+  campaigns: CampaignSummary[];
+  topFundraisers: LeaderboardEntry[];
+};
+
+export type CommunityStats = {
+  totalRaised: number;
+  totalDonations: number;
+  fundraiserCount: number;
+  followerCount: number;
+};
+
+export type CampaignSummary = {
+  id: string;
+  slug: string;
+  title: string;
+  imageUrl: string;
+  organizerName: string;
+  raisedAmount: number;
+  goalAmount: number;
+  donationCount: number;
+  createdAt: string;
+};
+
+export type LeaderboardEntry = {
+  rank: number;
+  organizerName: string;
+  organizerAvatarUrl: string | null;
+  organizerUsername: string;
+  campaignTitle: string;
+  campaignSlug: string;
+  raisedAmount: number;
+};
