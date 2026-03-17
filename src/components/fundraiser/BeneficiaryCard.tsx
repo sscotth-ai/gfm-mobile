@@ -40,7 +40,7 @@ export default function BeneficiaryCard({ beneficiary }: BeneficiaryCardProps) {
           </div>
 
           <Link
-            to={`/communities/${beneficiary.id}`}
+            to={`/communities/${beneficiary.slug}`}
             className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
           >
             View community page

@@ -4,15 +4,11 @@ import { useParams } from "react-router-dom";
 import PageShell from "@/components/layout/PageShell";
 
 const FundraiserPage = lazy(() => import("@/pages/FundraiserPage"));
+const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
 
 function ProfileStub() {
   const { username } = useParams();
-  return <div>Profile coming soon {username}</div>;
-}
-
-function CommunityStub() {
-  const { slug } = useParams();
-  return <div>Community coming soon {slug}</div>;
+  return <div className="py-12 text-center text-muted-foreground">Profile coming soon — {username}</div>;
 }
 
 export default function App() {
@@ -28,13 +24,20 @@ export default function App() {
         <Route
           path="f/:slug"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}>
               <FundraiserPage />
             </Suspense>
           }
         />
+        <Route
+          path="communities/:slug"
+          element={
+            <Suspense fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}>
+              <CommunityPage />
+            </Suspense>
+          }
+        />
         <Route path="u/:username" element={<ProfileStub />} />
-        <Route path="communities/:slug" element={<CommunityStub />} />
       </Route>
     </Routes>
   );

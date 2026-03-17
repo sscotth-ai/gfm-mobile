@@ -37,6 +37,7 @@ export type Organizer = {
 
 export type Beneficiary = {
   id: string;
+  slug: string;
   name: string;
   description: string;
   isVerified: boolean;

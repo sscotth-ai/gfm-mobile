@@ -49,6 +49,7 @@
     },
     "beneficiary": {
       "id": "org_watch_duty_001",
+      "slug": "watch-duty",
       "name": "Watch Duty",
       "description": "Watch Duty is a 501(c)(3) nonprofit providing free, real-time wildfire alerts powered by trained firefighters and first responders. Donations are tax-deductible.",
       "isVerified": true,
