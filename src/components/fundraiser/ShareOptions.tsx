@@ -3,13 +3,7 @@
 import { useState } from "react";
 import { Link, Twitter, Facebook, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 interface ShareOptionsProps {
   campaignTitle: string;
@@ -41,7 +35,12 @@ export default function ShareOptions({ campaignTitle }: ShareOptionsProps) {
   return (
     <Sheet>
       <SheetTrigger
-        render={<Button variant="outline" />}
+        render={
+          <Button
+            variant="secondary"
+            className="w-full bg-[#274a34] text-[#ccf88e] hover:bg-[#1f3b29] hover:text-[#ccf88e]"
+          />
+        }
       >
         <Link className="size-4" />
         Share
@@ -51,19 +50,11 @@ export default function ShareOptions({ campaignTitle }: ShareOptionsProps) {
           <SheetTitle>Share this fundraiser</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-2 px-4 pb-4">
-          <Button
-            variant="ghost"
-            className="w-full justify-start py-3"
-            onClick={handleCopyLink}
-          >
+          <Button variant="ghost" className="w-full justify-start py-3" onClick={handleCopyLink}>
             <Link className="size-4" />
             {copied ? "Copied!" : "Copy link"}
           </Button>
-          <Button
-            variant="ghost"
-            className="w-full justify-start py-3"
-            onClick={handleShareX}
-          >
+          <Button variant="ghost" className="w-full justify-start py-3" onClick={handleShareX}>
             <Twitter className="size-4" />
             Share on X
           </Button>
@@ -75,11 +66,7 @@ export default function ShareOptions({ campaignTitle }: ShareOptionsProps) {
             <Facebook className="size-4" />
             Share on Facebook
           </Button>
-          <Button
-            variant="ghost"
-            className="w-full justify-start py-3"
-            onClick={handleShareEmail}
-          >
+          <Button variant="ghost" className="w-full justify-start py-3" onClick={handleShareEmail}>
             <Mail className="size-4" />
             Share via Email
           </Button>

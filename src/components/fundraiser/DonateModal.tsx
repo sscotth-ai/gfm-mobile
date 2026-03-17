@@ -40,13 +40,9 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
     }
   }, [open]);
 
-  const effectiveAmount = showCustom
-    ? parseFloat(customAmount) || null
-    : selectedAmount;
+  const effectiveAmount = showCustom ? parseFloat(customAmount) || null : selectedAmount;
 
-  const totalAmount = effectiveAmount
-    ? effectiveAmount + (includeTip ? TIP_AMOUNT : 0)
-    : null;
+  const totalAmount = effectiveAmount ? effectiveAmount + (includeTip ? TIP_AMOUNT : 0) : null;
 
   function handlePresetSelect(amount: number) {
     setShowCustom(false);
@@ -109,11 +105,7 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
               {/* Other amount button / custom input */}
               <div className="mt-3">
                 {!showCustom ? (
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={handleShowCustom}
-                  >
+                  <Button variant="outline" className="w-full" onClick={handleShowCustom}>
                     Other amount
                   </Button>
                 ) : (
@@ -138,8 +130,7 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
               {/* Tip toggle */}
               <label className="flex cursor-pointer items-center justify-between gap-3">
                 <span className="text-sm">
-                  Include a {formatCurrency(TIP_AMOUNT)} tip to help the
-                  platform
+                  Include a {formatCurrency(TIP_AMOUNT)} tip to help the platform
                 </span>
                 <button
                   type="button"
@@ -185,16 +176,12 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
 
               <h2 className="mt-4 text-lg font-semibold">Thank you!</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Your donation of{" "}
-                {totalAmount ? formatCurrency(totalAmount) : ""} will make a
+                Your donation of {totalAmount ? formatCurrency(totalAmount) : ""} will make a
                 difference.
               </p>
 
               <DialogFooter className="mt-6 w-full">
-                <Button
-                  className="w-full"
-                  onClick={handleDone}
-                >
+                <Button className="w-full" onClick={handleDone}>
                   Done
                 </Button>
               </DialogFooter>

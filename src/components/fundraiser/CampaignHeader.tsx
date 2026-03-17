@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 import { MapPin, Calendar } from "lucide-react";
 import type { Organizer } from "@/types";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { fadeUp } from "@/lib/animations";
 import { formatRelativeTime } from "@/lib/format";
 
@@ -23,47 +22,42 @@ export default function CampaignHeader({
   category,
 }: CampaignHeaderProps) {
   return (
-    <motion.div
-      initial={fadeUp.initial}
-      animate={fadeUp.animate}
-      className="space-y-3"
-    >
-      <h1 className="text-2xl font-bold text-foreground lg:text-3xl">
-        {title}
-      </h1>
+    <motion.div initial={fadeUp.initial} animate={fadeUp.animate} className="space-y-5">
+      <h1 className="gfm-display max-w-4xl text-[44px] leading-[0.96] sm:text-[56px]">{title}</h1>
 
-      <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+      <div className="flex flex-wrap items-center gap-3 text-[15px] text-[#6f7069]">
         <Link
           to={`/u/${organizer.username}`}
-          className="flex items-center gap-2 hover:text-foreground"
+          className="flex items-center gap-3 hover:text-[#232323]"
         >
-          <Avatar className="size-8">
+          <Avatar className="size-11 border border-[#e3e2dd]">
             <AvatarImage src={organizer.avatarUrl} alt={organizer.displayName} />
-            <AvatarFallback>
+            <AvatarFallback className="bg-[#f7f5f2] text-[#274a34]">
               {organizer.displayName.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
-          <span className="font-medium text-foreground">
-            {organizer.displayName}
-          </span>
+          <span className="font-semibold text-[#232323]">{organizer.displayName}</span>
         </Link>
 
-        <span className="text-muted-foreground/50">&middot;</span>
+        <span className="text-[#c2c0bb]">&middot;</span>
 
-        <span className="inline-flex items-center gap-1">
-          <MapPin className="size-3.5" />
+        <span className="inline-flex items-center gap-1.5">
+          <MapPin className="size-4" />
           {organizer.location}
         </span>
 
-        <span className="text-muted-foreground/50">&middot;</span>
+        <span className="text-[#c2c0bb]">&middot;</span>
 
-        <span className="inline-flex items-center gap-1">
-          <Calendar className="size-3.5" />
+        <span className="inline-flex items-center gap-1.5">
+          <Calendar className="size-4" />
           {formatRelativeTime(createdAt)}
         </span>
       </div>
 
-      <Badge variant="secondary">{category}</Badge>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="gfm-chip">{category}</span>
+        <span className="gfm-chip">Tax deductible</span>
+      </div>
     </motion.div>
   );
 }

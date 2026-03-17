@@ -27,7 +27,7 @@ export default function StickyDonateBar({
       ([entry]) => {
         setIsVisible(!entry.isIntersecting);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     observer.observe(hero);
@@ -47,18 +47,16 @@ export default function StickyDonateBar({
           transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
           className="fixed bottom-0 left-0 right-0 z-40 lg:hidden"
         >
-          <div className="border-t bg-background px-4 py-3">
-            <div className="flex items-center justify-between">
+          <div className="border-t border-[#e3e2dd] bg-white/96 px-4 py-3 backdrop-blur-sm">
+            <div className="mx-auto flex max-w-[1152px] items-center justify-between gap-4">
               <div>
-                <p className="font-semibold">
+                <p className="text-[16px] font-semibold text-[#232323]">
                   {formatCurrency(raisedAmount)} raised
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  of {formatCurrency(goalAmount)} goal
-                </p>
+                <p className="text-[14px] text-[#6f7069]">of {formatCurrency(goalAmount)} goal</p>
               </div>
               <Button
-                className="bg-heart text-heart-foreground hover:bg-heart/90"
+                className="bg-[#ccf88e] text-[#274a34] hover:bg-[#c2f27f]"
                 onClick={onDonateClick}
               >
                 <Heart className="size-4" />

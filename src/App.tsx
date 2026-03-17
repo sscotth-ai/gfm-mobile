@@ -8,7 +8,9 @@ const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
 
 function ProfileStub() {
   const { username } = useParams();
-  return <div className="py-12 text-center text-muted-foreground">Profile coming soon — {username}</div>;
+  return (
+    <div className="py-12 text-center text-muted-foreground">Profile coming soon — {username}</div>
+  );
 }
 
 export default function App() {
@@ -17,14 +19,14 @@ export default function App() {
       <Route element={<PageShell />}>
         <Route
           index
-          element={
-            <Navigate to="/f/realtime-alerts-for-wildfire-safety-r5jkk" replace />
-          }
+          element={<Navigate to="/f/realtime-alerts-for-wildfire-safety-r5jkk" replace />}
         />
         <Route
           path="f/:slug"
           element={
-            <Suspense fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}>
+            <Suspense
+              fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}
+            >
               <FundraiserPage />
             </Suspense>
           }
@@ -32,7 +34,9 @@ export default function App() {
         <Route
           path="communities/:slug"
           element={
-            <Suspense fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}>
+            <Suspense
+              fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}
+            >
               <CommunityPage />
             </Suspense>
           }

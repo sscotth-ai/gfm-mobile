@@ -70,7 +70,9 @@ class MetricsCollector {
     }
 
     // Time to First Byte from Navigation Timing
-    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    const navEntry = performance.getEntriesByType("navigation")[0] as
+      | PerformanceNavigationTiming
+      | undefined;
     if (navEntry) {
       this.track("ttfb", "performance", {
         value: Math.round(navEntry.responseStart - navEntry.requestStart),

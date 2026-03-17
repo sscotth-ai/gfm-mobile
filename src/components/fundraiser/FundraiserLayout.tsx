@@ -5,16 +5,11 @@ interface FundraiserLayoutProps {
   sidebar: ReactNode;
 }
 
-export default function FundraiserLayout({
-  main,
-  sidebar,
-}: FundraiserLayoutProps) {
+export default function FundraiserLayout({ main, sidebar }: FundraiserLayoutProps) {
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-      <div className="lg:col-span-7">{main}</div>
-      <div className="lg:col-span-4 lg:col-start-9 lg:sticky lg:top-20 lg:self-start">
-        {sidebar}
-      </div>
+    <div className="gfm-shell grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-10">
+      <div className="min-w-0">{main}</div>
+      <div className="lg:sticky lg:top-[104px] lg:self-start">{sidebar}</div>
     </div>
   );
 }

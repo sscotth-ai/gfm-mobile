@@ -3,9 +3,9 @@ import Navbar from "@/components/layout/Navbar";
 
 export default function PageShell() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="mx-auto max-w-6xl px-4 py-6 pt-22">
+      <main className="pb-20 pt-[88px] sm:pt-[96px]">
         <Outlet />
       </main>
     </div>

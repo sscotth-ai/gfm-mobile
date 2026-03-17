@@ -8,10 +8,7 @@ export const handlers = [
 
     const { slug } = params;
     if (slug !== mockData.campaign.slug) {
-      return HttpResponse.json(
-        { error: "Campaign not found" },
-        { status: 404 },
-      );
+      return HttpResponse.json({ error: "Campaign not found" }, { status: 404 });
     }
 
     return HttpResponse.json(mockData.campaign);
@@ -70,10 +67,7 @@ export const handlers = [
 
     const { slug } = params;
     if (slug !== mockData.community.slug) {
-      return HttpResponse.json(
-        { error: "Community not found" },
-        { status: 404 },
-      );
+      return HttpResponse.json({ error: "Community not found" }, { status: 404 });
     }
 
     return HttpResponse.json(mockData.community);

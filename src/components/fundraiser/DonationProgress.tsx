@@ -18,21 +18,17 @@ export default function DonationProgress({
   const percentage = Math.min((raisedAmount / goalAmount) * 100, 100);
 
   return (
-    <motion.div
-      initial={fadeUp.initial}
-      animate={fadeUp.animate}
-      className="space-y-2"
-    >
-      <p className="text-sm text-muted-foreground">
-        <span className="text-lg font-bold text-foreground">
+    <motion.div initial={fadeUp.initial} animate={fadeUp.animate} className="space-y-3">
+      <p className="text-[17px] text-[#6f7069]">
+        <span className="text-[24px] font-semibold text-[#232323]">
           {formatCurrency(raisedAmount)}
         </span>{" "}
         raised of {formatCurrency(goalAmount)} goal
       </p>
 
-      <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+      <div className="h-2 w-full overflow-hidden rounded-full bg-[#ece9e4]">
         <motion.div
-          className="h-full rounded-full bg-success"
+          className="h-full rounded-full bg-[#69c65b]"
           initial={{ width: "0%" }}
           whileInView={{ width: `${percentage}%` }}
           transition={{ duration: 1, ease: easeOut }}
@@ -40,9 +36,7 @@ export default function DonationProgress({
         />
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        {formatNumber(donationCount)} donations
-      </p>
+      <p className="text-[15px] text-[#6f7069]">{formatNumber(donationCount)} donations</p>
     </motion.div>
   );
 }

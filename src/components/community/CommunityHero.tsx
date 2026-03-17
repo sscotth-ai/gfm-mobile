@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Check, MapPin, Users } from "lucide-react";
+import { Check, MapPin, Share2, Users } from "lucide-react";
 import type { Community } from "@/types";
 import { fadeUp } from "@/lib/animations";
 import { formatNumber } from "@/lib/format";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import CommunityStats from "@/components/community/CommunityStats";
 
 interface CommunityHeroProps {
   community: Community;
@@ -16,71 +17,109 @@ interface CommunityHeroProps {
 
 export default function CommunityHero({ community }: CommunityHeroProps) {
   const [bannerError, setBannerError] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const showBannerFallback = !community.bannerUrl || bannerError;
+  const description = community.description
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const avatars = community.topFundraisers.slice(0, 3);
 
   return (
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate}>
-      {/* Banner */}
-      <div className="overflow-hidden rounded-xl">
-        {showBannerFallback ? (
-          <div className="aspect-[3/1] w-full bg-gradient-to-br from-teal-400 to-emerald-500" />
-        ) : (
-          <img
-            src={community.bannerUrl}
-            alt={`${community.name} banner`}
-            onError={() => setBannerError(true)}
-            className="aspect-[3/1] w-full object-cover"
-          />
-        )}
-      </div>
-
-      {/* Info row */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
-          {/* Logo avatar */}
-          <Avatar className="size-16 -mt-8 rounded-full border-4 border-background">
-            {community.logoUrl ? (
-              <AvatarImage src={community.logoUrl} alt={community.name} />
-            ) : null}
-            <AvatarFallback className="bg-gradient-to-br from-teal-400 to-emerald-500 text-white text-xl font-bold">
-              {community.name.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-
-          {/* Name, tagline, location, verified */}
-          <div className="flex flex-col gap-1 pt-2">
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold">{community.name}</h1>
-              {community.isVerified && (
-                <Badge>
-                  <Check className="size-3" />
-                  Verified
-                </Badge>
-              )}
-            </div>
-
-            {community.tagline && (
-              <p className="text-muted-foreground">{community.tagline}</p>
-            )}
-
-            {community.location && (
-              <p className="flex items-center gap-1 text-sm text-muted-foreground">
-                <MapPin className="size-3.5" />
-                {community.location}
-              </p>
-            )}
-          </div>
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,533px)_minmax(0,1fr)] lg:gap-10">
+        <div className="overflow-hidden rounded-[24px] bg-gradient-to-b from-[#ffc736] via-[#f9a414] to-[#c97a0b]">
+          {showBannerFallback ? (
+            <div className="aspect-[4/3] w-full bg-gradient-to-br from-[#1dbf9f] to-[#10b981]" />
+          ) : (
+            <img
+              src={community.bannerUrl}
+              alt="Community Header Photo"
+              onError={() => setBannerError(true)}
+              className="aspect-[4/3] w-full scale-[1.08] object-cover object-top"
+            />
+          )}
         </div>
 
-        {/* Follow button */}
-        <div className="flex flex-col items-center gap-1 pt-2">
-          <Button variant="outline">
-            <Users className="size-4" />
-            Follow
+        <div className="flex flex-col justify-center gap-5">
+          <div className="gfm-chip w-fit">
+            <Users className="size-3.5" />
+            Community
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="gfm-display text-[44px] leading-[0.98] sm:text-[56px]">
+              {community.name}
+            </h1>
+            {community.isVerified && (
+              <Badge className="rounded-full bg-[#232323] px-3 py-1 text-[14px] text-white hover:bg-[#232323]">
+                <Check className="size-3.5" />
+                Verified
+              </Badge>
+            )}
+          </div>
+
+          <div className="max-w-2xl">
+            <p
+              className={
+                expanded
+                  ? "text-[18px] leading-8 text-[#4f504a]"
+                  : "line-clamp-5 text-[18px] leading-8 text-[#4f504a]"
+              }
+            >
+              {description}
+            </p>
+            <button
+              className="mt-2 text-[15px] font-medium text-[#274a34] hover:underline"
+              onClick={() => setExpanded((value) => !value)}
+            >
+              {expanded ? "Show less" : "read more"}
+            </button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 text-[16px] text-[#6f7069]">
+            <div className="flex items-center">
+              <div className="flex -space-x-3">
+                {avatars.map((entry) => (
+                  <Avatar
+                    key={entry.rank}
+                    className="size-10 border-2 border-white shadow-[0_0_0_1px_#e3e2dd]"
+                  >
+                    {entry.organizerAvatarUrl ? (
+                      <AvatarImage src={entry.organizerAvatarUrl} alt={entry.organizerName} />
+                    ) : null}
+                    <AvatarFallback className="bg-[#f7f5f2] text-[#6f7069]">
+                      {entry.organizerName.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+              <span className="ml-4 font-medium text-[#232323]">
+                {formatNumber(community.stats.followerCount)} followers
+              </span>
+            </div>
+
+            <Button variant="outline" className="h-10">
+              Follow
+            </Button>
+            <Button variant="outline" className="h-10 px-4">
+              <Share2 className="size-4" />
+              Share
+            </Button>
+          </div>
+
+          {community.location && (
+            <p className="flex items-center gap-2 text-[16px] text-[#6f7069]">
+              <MapPin className="size-4" />
+              {community.location}
+            </p>
+          )}
+
+          <CommunityStats stats={community.stats} />
+
+          <Button className="h-12 w-full max-w-[220px] bg-[#274a34] text-white hover:bg-[#1f3b29]">
+            Start a GoFundMe
           </Button>
-          <span className="text-xs text-muted-foreground">
-            {formatNumber(community.stats.followerCount)} followers
-          </span>
         </div>
       </div>
     </motion.div>

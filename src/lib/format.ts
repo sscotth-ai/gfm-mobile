@@ -20,6 +20,15 @@ export function formatCurrency(amount: number): string {
       });
 }
 
+export function formatCompactCurrency(amount: number): string {
+  return amount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+    maximumFractionDigits: 1,
+  });
+}
+
 /**
  * "2 hours ago" style relative timestamp.
  */

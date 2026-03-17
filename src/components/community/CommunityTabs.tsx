@@ -22,23 +22,21 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
     : community.campaigns.slice(0, INITIAL_VISIBLE);
 
   return (
-    <Tabs defaultValue="fundraisers">
-      <TabsList>
-        <TabsTrigger value="fundraisers">
-          Fundraisers ({community.campaigns.length})
-        </TabsTrigger>
+    <Tabs defaultValue="fundraisers" className="gap-6">
+      <TabsList variant="line">
+        <TabsTrigger value="fundraisers">Fundraisers ({community.campaigns.length})</TabsTrigger>
         <TabsTrigger value="about">About</TabsTrigger>
       </TabsList>
 
-      <TabsContent value="fundraisers">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <TabsContent value="fundraisers" className="pt-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {visibleCampaigns.map((campaign) => (
             <CampaignCard key={campaign.id} campaign={campaign} />
           ))}
         </div>
 
         {!showAll && community.campaigns.length > INITIAL_VISIBLE && (
-          <div className="mt-4 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <Button variant="outline" onClick={() => setShowAll(true)}>
               Show more
             </Button>
@@ -46,9 +44,9 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
         )}
       </TabsContent>
 
-      <TabsContent value="about">
+      <TabsContent value="about" className="pt-2">
         <div
-          className="leading-relaxed [&>p]:mb-4 [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:mt-6 [&>h3]:mb-2 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-4 [&>li]:mb-1"
+          className="gfm-copy [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:text-[24px] [&>h3]:font-semibold [&>li]:mb-2 [&>p]:mb-5 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6"
           dangerouslySetInnerHTML={{ __html: community.description }}
         />
 
@@ -57,7 +55,7 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
             href={community.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+            className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-medium text-[#274a34] hover:underline"
           >
             <ExternalLink className="size-4" />
             {community.website}
@@ -66,7 +64,7 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
 
         {community.isNonprofit && (
           <div className="mt-4 flex gap-2">
-            <Badge variant="secondary" className="gap-1">
+            <Badge variant="secondary" className="gap-1 rounded-full bg-[#f7f5f2] text-[#232323]">
               <Check className="size-3" />
               Nonprofit
             </Badge>

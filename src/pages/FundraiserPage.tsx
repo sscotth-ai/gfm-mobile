@@ -14,7 +14,6 @@ import WordsOfSupport from "@/components/fundraiser/WordsOfSupport";
 import FundraiserSidebar from "@/components/fundraiser/FundraiserSidebar";
 import DonateModal from "@/components/fundraiser/DonateModal";
 import StickyDonateBar from "@/components/fundraiser/StickyDonateBar";
-import { Separator } from "@/components/ui/separator";
 
 export default function FundraiserPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -37,25 +36,23 @@ export default function FundraiserPage() {
   }
 
   if (isLoading || !campaign) {
-    return (
-      <div className="py-12 text-center text-muted-foreground">Loading...</div>
-    );
+    return <div className="py-12 text-center text-muted-foreground">Loading...</div>;
   }
 
   return (
     <>
       <FundraiserLayout
         main={
-          <div className="flex flex-col gap-6">
-            <div id="campaign-hero">
-              <CampaignHero images={campaign.images} />
-            </div>
+          <div className="flex flex-col gap-8">
             <CampaignHeader
               title={campaign.title}
               organizer={campaign.organizer}
               createdAt={campaign.createdAt}
               category={campaign.category}
             />
+            <div id="campaign-hero">
+              <CampaignHero images={campaign.images} />
+            </div>
 
             {/* Mobile-only progress + donate */}
             <div className="lg:hidden">
@@ -66,17 +63,13 @@ export default function FundraiserPage() {
               />
             </div>
 
-            <Separator />
             <div ref={storyRef}>
               <CampaignStory description={campaign.description} />
             </div>
-            <Separator />
             <OrganizerCard organizer={campaign.organizer} />
-            <Separator />
-            <div ref={donationsRef}>
+            <div ref={donationsRef} className="gfm-card p-6">
               <DonationsList donations={campaign.donations} />
             </div>
-            <Separator />
             <div ref={supportRef}>
               <WordsOfSupport comments={campaign.comments} />
             </div>
