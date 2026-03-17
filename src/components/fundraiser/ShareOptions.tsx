@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Link, Twitter, Facebook, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 interface ShareOptionsProps {
   campaignTitle: string;
+  className?: string;
 }
 
-export default function ShareOptions({ campaignTitle }: ShareOptionsProps) {
+export default function ShareOptions({ campaignTitle, className }: ShareOptionsProps) {
   const [copied, setCopied] = useState(false);
 
   function handleCopyLink() {
@@ -38,7 +40,10 @@ export default function ShareOptions({ campaignTitle }: ShareOptionsProps) {
         render={
           <Button
             variant="secondary"
-            className="w-full bg-[#274a34] text-[#ccf88e] hover:bg-[#1f3b29] hover:text-[#ccf88e]"
+            className={cn(
+              "bg-[#274a34] text-[#ccf88e] hover:bg-[#1f3b29] hover:text-[#ccf88e]",
+              className,
+            )}
           />
         }
       >

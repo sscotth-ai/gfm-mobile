@@ -12,8 +12,10 @@ import OrganizerCard from "@/components/fundraiser/OrganizerCard";
 import DonationsList from "@/components/fundraiser/DonationsList";
 import WordsOfSupport from "@/components/fundraiser/WordsOfSupport";
 import FundraiserSidebar from "@/components/fundraiser/FundraiserSidebar";
+import ShareOptions from "@/components/fundraiser/ShareOptions";
 import DonateModal from "@/components/fundraiser/DonateModal";
 import StickyDonateBar from "@/components/fundraiser/StickyDonateBar";
+import { Button } from "@/components/ui/button";
 
 export default function FundraiserPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -61,6 +63,15 @@ export default function FundraiserPage() {
                 goalAmount={campaign.goalAmount}
                 donationCount={campaign.donationCount}
               />
+              <div className="mt-4 flex gap-3">
+                <Button
+                  className="flex-1 bg-[#ccf88e] text-[#274a34] hover:bg-[#c2f27f]"
+                  onClick={() => handleDonateClick("mobile_progress")}
+                >
+                  Donate now
+                </Button>
+                <ShareOptions campaignTitle={campaign.title} className="px-4" />
+              </div>
             </div>
 
             <div ref={storyRef}>

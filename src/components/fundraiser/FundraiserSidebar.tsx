@@ -68,7 +68,7 @@ export default function FundraiserSidebar({ campaign, onDonateClick }: Fundraise
                 <Heart className="size-4" />
                 Donate now
               </Button>
-              <ShareOptions campaignTitle={campaign.title} />
+              <ShareOptions campaignTitle={campaign.title} className="w-full" />
             </div>
 
             <OrganizerCard organizer={campaign.organizer} />

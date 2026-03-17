@@ -28,17 +28,46 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
   return (
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate}>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,533px)_minmax(0,1fr)] lg:gap-10">
-        <div className="overflow-hidden rounded-[24px] bg-gradient-to-b from-[#ffc736] via-[#f9a414] to-[#c97a0b]">
-          {showBannerFallback ? (
-            <div className="aspect-[4/3] w-full bg-gradient-to-br from-[#1dbf9f] to-[#10b981]" />
-          ) : (
-            <img
-              src={community.bannerUrl}
-              alt="Community Header Photo"
-              onError={() => setBannerError(true)}
-              className="aspect-[4/3] w-full scale-[1.08] object-cover object-top"
-            />
-          )}
+        <div className="space-y-4">
+          <div className="overflow-hidden rounded-[24px] bg-gradient-to-b from-[#ffc736] via-[#f9a414] to-[#c97a0b]">
+            {showBannerFallback ? (
+              <div className="aspect-[4/3] w-full bg-gradient-to-br from-[#1dbf9f] to-[#10b981]" />
+            ) : (
+              <img
+                src={community.bannerUrl}
+                alt="Community Header Photo"
+                onError={() => setBannerError(true)}
+                className="aspect-[4/3] w-full scale-[1.08] object-cover object-top"
+              />
+            )}
+          </div>
+
+          <div className="flex items-center justify-between lg:hidden">
+            <div className="flex items-center">
+              <div className="flex -space-x-3">
+                {avatars.map((entry) => (
+                  <Avatar
+                    key={entry.rank}
+                    className="size-10 border-2 border-white shadow-[0_0_0_1px_#e3e2dd]"
+                  >
+                    {entry.organizerAvatarUrl ? (
+                      <AvatarImage src={entry.organizerAvatarUrl} alt={entry.organizerName} />
+                    ) : null}
+                    <AvatarFallback className="bg-[#f7f5f2] text-[#6f7069]">
+                      {entry.organizerName.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+              <span className="ml-4 font-medium text-[#232323]">
+                {formatNumber(community.stats.followerCount)} followers
+              </span>
+            </div>
+
+            <Button variant="outline" className="h-10">
+              Follow
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-col justify-center gap-5">
@@ -77,7 +106,7 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 text-[16px] text-[#6f7069]">
+          <div className="hidden flex-wrap items-center gap-3 text-[16px] text-[#6f7069] lg:flex">
             <div className="flex items-center">
               <div className="flex -space-x-3">
                 {avatars.map((entry) => (
@@ -107,6 +136,11 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
               Share
             </Button>
           </div>
+
+          <Button variant="outline" className="h-10 w-fit px-4 lg:hidden">
+            <Share2 className="size-4" />
+            Share
+          </Button>
 
           {community.location && (
             <p className="flex items-center gap-2 text-[16px] text-[#6f7069]">
