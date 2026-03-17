@@ -353,5 +353,107 @@
         "raisedAmount": 2102
       }
     ]
+  },
+  "profile": {
+    "username": "janahan",
+    "displayName": "Janahan Vivekanandan",
+    "avatarUrl": "https://images.gofundme.com/pBRbOYguQ5yyXSV6NKDcYJyK7Hg=/fit-in/370x298/https://www.gofundme.com/person/profiles/a231a6c6c08941f68f6c595ca2b4700e_edited_photo_1745515943845.jpeg",
+    "inspiredCount": 21,
+    "followers": 92,
+    "following": 9,
+    "discoverPeople": [
+      {
+        "id": "disc_1",
+        "avatarUrl": "https://images.gofundme.com/C5tMvnkvnTsVGkG28youa5XjLWo=/128x128/https://www.gofundme.com/person/profiles/c89432eea9e644c08484c3f1f2815b6d_edited_photo_1753274232722.jpeg"
+      },
+      {
+        "id": "disc_2",
+        "avatarUrl": "https://images.gofundme.com/L3HtyMnJdkVY1fH3_AknQ7UGXO0=/128x128/https://www.gofundme.com/person/profiles/8877dc7eccf04a528f0f8352e0473231_edited_photo_1706758883938.png"
+      },
+      {
+        "id": "disc_3",
+        "avatarUrl": "https://images.gofundme.com/sGuwVJi1-Pfz2YMVaOBcHSq4i38=/128x128/https://www.gofundme.com/person/profiles/d08e7c046ea3423f895b1ae24b62df2c_edited_photo_1731943154660.jpeg"
+      }
+    ],
+    "topCauses": [
+      {
+        "id": "cause_animals",
+        "label": "Animals",
+        "icon": "paw",
+        "background": "#ffe48e",
+        "foreground": "#7a4b00"
+      },
+      {
+        "id": "cause_arts",
+        "label": "Arts & Culture",
+        "icon": "palette",
+        "background": "#eed7ff",
+        "foreground": "#6b3ea2"
+      },
+      {
+        "id": "cause_environment",
+        "label": "Environment",
+        "icon": "leaf",
+        "background": "#dff7b5",
+        "foreground": "#315f23"
+      }
+    ],
+    "highlights": [
+      {
+        "id": "highlight_1",
+        "title": "Keep Sandy on Ossabaw",
+        "imageUrl": "https://2dbdd5116ffa30a49aa8-c03f075f8191fb4e60e74b907071aee8.ssl.cf1.rackcdn.com/4639206_1432070518.7844.jpg",
+        "raisedAmount": 66785,
+        "supporterCount": 33,
+        "href": "https://www.gofundme.com/f/sandywest"
+      },
+      {
+        "id": "highlight_2",
+        "title": "Saving Eliza",
+        "imageUrl": "https://i.ytimg.com/vi/rryFgbt6Cxk/0.jpg",
+        "raisedAmount": 2078890,
+        "supporterCount": 52,
+        "href": "https://www.gofundme.com/f/ElizaONeill"
+      },
+      {
+        "id": "highlight_3",
+        "title": "Andy Ritchie's Big Headache",
+        "imageUrl": "https://2dbdd5116ffa30a49aa8-c03f075f8191fb4e60e74b907071aee8.ssl.cf1.rackcdn.com/5295129_1436911971.4751.jpg",
+        "raisedAmount": 102442,
+        "supporterCount": 102,
+        "href": "https://www.gofundme.com/f/AndyRitchie"
+      }
+    ],
+    "activity": [
+      {
+        "id": "activity_1",
+        "createdAt": "2026-02-18T09:15:00Z",
+        "action": "Janahan Vivekanandan donated $200 to a fundraiser",
+        "campaign": {
+          "title": "Real-Time Alerts for Wildfire Safety",
+          "beneficiaryName": "Watch Duty",
+          "beneficiaryLogoUrl": "https://pics.paypal.com/00/p/MzM1NGQwOWMtNDAwZi00ZjRlLTkxYjgtNzUwZDkwNzQ1Njhl/image_12.PNG",
+          "imageUrl": "https://assets.classy.org/10701950/6ebb40da-05cc-11f1-b48a-0ef061206cc9.jpg",
+          "slug": "realtime-alerts-for-wildfire-safety-r5jkk",
+          "progressPercent": 70
+        },
+        "reactions": 2
+      },
+      {
+        "id": "activity_2",
+        "createdAt": "2026-02-14T08:00:00Z",
+        "action": "Janahan Vivekanandan started a fundraiser",
+        "description": "As climate-related disasters worsen, it's crucial that we act swiftly. I believe in the mission of Watch Duty. Every second counts when a wildfire threatens our communities, and this campaign helps keep real-time alerts free and accessible.",
+        "campaign": {
+          "title": "Real-Time Alerts for Wildfire Safety",
+          "beneficiaryName": "Watch Duty",
+          "beneficiaryLogoUrl": "https://pics.paypal.com/00/p/MzM1NGQwOWMtNDAwZi00ZjRlLTkxYjgtNzUwZDkwNzQ1Njhl/image_12.PNG",
+          "imageUrl": "https://assets.classy.org/10701950/6ebb40da-05cc-11f1-b48a-0ef061206cc9.jpg",
+          "slug": "realtime-alerts-for-wildfire-safety-r5jkk",
+          "progressPercent": 70
+        },
+        "reactions": 0
+      }
+    ]
   }
 }

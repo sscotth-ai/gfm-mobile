@@ -110,3 +110,54 @@ export type LeaderboardEntry = {
   campaignSlug: string;
   raisedAmount: number;
 };
+
+export type Profile = {
+  username: string;
+  displayName: string;
+  avatarUrl: string;
+  inspiredCount: number;
+  followers: number;
+  following: number;
+  discoverPeople: ProfileSuggestion[];
+  topCauses: ProfileCause[];
+  highlights: ProfileHighlight[];
+  activity: ProfileActivity[];
+};
+
+export type ProfileSuggestion = {
+  id: string;
+  avatarUrl: string;
+};
+
+export type ProfileCause = {
+  id: string;
+  label: string;
+  icon: "paw" | "palette" | "leaf";
+  background: string;
+  foreground: string;
+};
+
+export type ProfileHighlight = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  raisedAmount: number;
+  supporterCount: number;
+  href: string;
+};
+
+export type ProfileActivity = {
+  id: string;
+  createdAt: string;
+  action: string;
+  description?: string;
+  campaign: {
+    title: string;
+    beneficiaryName: string;
+    beneficiaryLogoUrl: string;
+    imageUrl: string;
+    slug: string;
+    progressPercent: number;
+  };
+  reactions: number;
+};

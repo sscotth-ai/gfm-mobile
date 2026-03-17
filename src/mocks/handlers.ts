@@ -56,9 +56,15 @@ export const handlers = [
   }),
 
   // Get user profile
-  http.get("/api/users/:username", async () => {
+  http.get("/api/users/:username", async ({ params }) => {
     await delay(300);
-    return HttpResponse.json(mockData.campaign.organizer);
+
+    const { username } = params;
+    if (username !== mockData.profile.username) {
+      return HttpResponse.json({ error: "Profile not found" }, { status: 404 });
+    }
+
+    return HttpResponse.json(mockData.profile);
   }),
 
   // Get community

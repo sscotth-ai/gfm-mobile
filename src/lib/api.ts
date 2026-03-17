@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Campaign, Community } from "@/types";
+import type { Campaign, Community, Profile } from "@/types";
 
 export function useCampaign(slug: string) {
   return useQuery<Campaign>({
@@ -22,5 +22,17 @@ export function useCommunity(slug: string) {
       return res.json();
     },
     enabled: !!slug,
+  });
+}
+
+export function useProfile(username: string) {
+  return useQuery<Profile>({
+    queryKey: ["profile", username],
+    queryFn: async () => {
+      const res = await fetch(`/api/users/${username}`);
+      if (!res.ok) throw new Error("Profile not found");
+      return res.json();
+    },
+    enabled: !!username,
   });
 }

@@ -1,17 +1,10 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import PageShell from "@/components/layout/PageShell";
 
 const FundraiserPage = lazy(() => import("@/pages/FundraiserPage"));
 const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
-
-function ProfileStub() {
-  const { username } = useParams();
-  return (
-    <div className="py-12 text-center text-muted-foreground">Profile coming soon — {username}</div>
-  );
-}
+const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
 
 export default function App() {
   return (
@@ -41,7 +34,16 @@ export default function App() {
             </Suspense>
           }
         />
-        <Route path="u/:username" element={<ProfileStub />} />
+        <Route
+          path="u/:username"
+          element={
+            <Suspense
+              fallback={<div className="py-12 text-center text-muted-foreground">Loading...</div>}
+            >
+              <ProfilePage />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );
