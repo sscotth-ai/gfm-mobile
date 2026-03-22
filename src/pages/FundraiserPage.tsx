@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  Heart,
-  MessageCircle,
-  Share2,
-  ChevronDown,
-} from "lucide-react";
+import { Heart, MessageCircle, Share2, ChevronDown } from "lucide-react";
 import { useCampaign } from "@/lib/api";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { easeOut } from "@/lib/animations";
@@ -59,16 +54,10 @@ export default function FundraiserPage() {
     );
   }
 
-  const primaryImage =
-    campaign.images.find((img) => img.isPrimary) ?? campaign.images[0];
-  const percentage = Math.min(
-    (campaign.raisedAmount / campaign.goalAmount) * 100,
-    100,
-  );
+  const primaryImage = campaign.images.find((img) => img.isPrimary) ?? campaign.images[0];
+  const percentage = Math.min((campaign.raisedAmount / campaign.goalAmount) * 100, 100);
 
-  const descriptionText = campaign.description
-    .replace(/<[^>]*>/g, "")
-    .slice(0, 120);
+  const descriptionText = campaign.description.replace(/[#*_[\]]/g, "").slice(0, 120);
 
   return (
     <div className="min-h-screen bg-[#050505]">
@@ -153,20 +142,18 @@ export default function FundraiserPage() {
               >
                 <div
                   className={`flex size-12 items-center justify-center rounded-full transition-all active:scale-90 ${
-                    liked
-                      ? "bg-[#FF2E93]/20 border border-[#FF2E93]/40"
-                      : "glass"
+                    liked ? "bg-[#FF2E93]/20 border border-[#FF2E93]/40" : "glass"
                   }`}
                 >
                   <Heart
                     className={`size-7 transition-colors ${
-                      liked
-                        ? "fill-[#FF2E93] text-[#FF2E93]"
-                        : "text-white"
+                      liked ? "fill-[#FF2E93] text-[#FF2E93]" : "text-white"
                     }`}
                   />
                 </div>
-                <span className={`text-shadow text-xs font-medium ${liked ? "text-[#FF2E93]" : "text-white"}`}>
+                <span
+                  className={`text-shadow text-xs font-medium ${liked ? "text-[#FF2E93]" : "text-white"}`}
+                >
                   {formatNumber(likeCount)}
                 </span>
               </button>
@@ -207,9 +194,7 @@ export default function FundraiserPage() {
                 <div className="glass flex size-12 items-center justify-center rounded-full text-white transition-transform active:scale-90">
                   <Share2 className="size-7" />
                 </div>
-                <span className="text-shadow text-xs font-medium text-white">
-                  Share
-                </span>
+                <span className="text-shadow text-xs font-medium text-white">Share</span>
               </button>
             </div>
           </div>

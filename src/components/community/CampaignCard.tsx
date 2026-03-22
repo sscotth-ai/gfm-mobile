@@ -40,15 +40,14 @@ export default function CampaignCard({ campaign }: CampaignCardProps) {
             <p className="text-[14px] text-white/40">by {campaign.organizerName}</p>
 
             <div className="h-1.5 rounded-full bg-white/10">
-              <div
-                className="neon-bar h-full rounded-full"
-                style={{ width: `${percentage}%` }}
-              />
+              <div className="neon-bar h-full rounded-full" style={{ width: `${percentage}%` }} />
             </div>
 
             <p className="text-[14px] text-white/50">
-              <span className="text-[#0df29e] font-medium">{formatCurrency(campaign.raisedAmount)}</span> raised of{" "}
-              {formatCurrency(campaign.goalAmount)}
+              <span className="text-[#0df29e] font-medium">
+                {formatCurrency(campaign.raisedAmount)}
+              </span>{" "}
+              raised of {formatCurrency(campaign.goalAmount)}
             </p>
           </div>
         </div>

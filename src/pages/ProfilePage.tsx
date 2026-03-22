@@ -379,7 +379,9 @@ function ActivityItem({
               placeholder="Add a comment..."
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") handleComment(); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleComment();
+              }}
               className="flex-1 bg-transparent text-[13px] text-white outline-none placeholder:text-white/30"
             />
             <button

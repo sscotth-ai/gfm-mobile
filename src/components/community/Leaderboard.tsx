@@ -28,7 +28,9 @@ export default function Leaderboard({ entries, total }: LeaderboardProps) {
       >
         {entries.map((entry) => (
           <motion.li key={entry.rank} variants={staggerItem} className="flex items-center gap-3">
-            <span className={`w-6 text-center text-[18px] font-semibold ${entry.rank === 1 ? "text-[#0df29e]" : "text-white/30"}`}>
+            <span
+              className={`w-6 text-center text-[18px] font-semibold ${entry.rank === 1 ? "text-[#0df29e]" : "text-white/30"}`}
+            >
               {entry.rank}
             </span>
 

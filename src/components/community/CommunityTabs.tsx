@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ExternalLink, Check } from "lucide-react";
+import Markdown from "react-markdown";
 import type { Community } from "@/types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -48,10 +49,9 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
       </TabsContent>
 
       <TabsContent value="about" className="pt-2">
-        <div
-          className="gfm-copy [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:font-display [&>h3]:text-[24px] [&>h3]:font-semibold [&>h3]:text-white [&>li]:mb-2 [&>li]:text-white/70 [&>p]:mb-5 [&>p]:text-white/70 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6 [&_strong]:text-white"
-          dangerouslySetInnerHTML={{ __html: community.description }}
-        />
+        <div className="gfm-copy [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:font-display [&>h3]:text-[24px] [&>h3]:font-semibold [&>h3]:text-white [&>li]:mb-2 [&>li]:text-white/70 [&>p]:mb-5 [&>p]:text-white/70 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6 [&_strong]:text-white">
+          <Markdown>{community.description}</Markdown>
+        </div>
 
         {community.website && (
           <a

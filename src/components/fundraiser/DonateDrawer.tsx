@@ -178,10 +178,7 @@ export default function DonateDrawer({ open, onOpenChange }: DonateDrawerProps) 
                       <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2">
                         <HeartHandshake className="size-4 text-[#0df29e]" />
                         <p className="font-display text-sm font-medium text-slate-200">
-                          Your{" "}
-                          <span className="font-bold text-[#0df29e]">
-                            ${effectiveAmount}
-                          </span>{" "}
+                          Your <span className="font-bold text-[#0df29e]">${effectiveAmount}</span>{" "}
                           {effectiveAmount >= 500
                             ? "sponsors monitoring in a new county"
                             : effectiveAmount >= 100

@@ -93,10 +93,7 @@ export default function CommentsDrawer({
                   <div key={comment.id} className="flex items-start gap-3">
                     <Avatar className="size-9 shrink-0 border border-white/12">
                       {comment.authorAvatarUrl ? (
-                        <AvatarImage
-                          src={comment.authorAvatarUrl}
-                          alt={comment.authorName}
-                        />
+                        <AvatarImage src={comment.authorAvatarUrl} alt={comment.authorName} />
                       ) : null}
                       <AvatarFallback className="bg-white/8 text-xs text-white/50">
                         {comment.authorName.charAt(0).toUpperCase()}

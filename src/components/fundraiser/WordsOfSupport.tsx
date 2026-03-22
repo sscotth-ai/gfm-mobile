@@ -20,7 +20,9 @@ export default function WordsOfSupport({ comments }: WordsOfSupportProps) {
 
   return (
     <div className="space-y-4">
-      <h3 className="font-display text-[26px] font-semibold text-white">Words of support ({total})</h3>
+      <h3 className="font-display text-[26px] font-semibold text-white">
+        Words of support ({total})
+      </h3>
 
       <motion.div initial="initial" animate={staggerContainer.animate} className="space-y-6">
         {visibleComments.map((comment) => (

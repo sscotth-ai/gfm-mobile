@@ -19,7 +19,7 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
   const [expanded, setExpanded] = useState(false);
   const showBannerFallback = !community.bannerUrl || bannerError;
   const description = community.description
-    .replace(/<[^>]*>/g, " ")
+    .replace(/[#*_[\]]/g, "")
     .replace(/\s+/g, " ")
     .trim();
   const avatars = community.topFundraisers.slice(0, 3);

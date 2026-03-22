@@ -59,10 +59,7 @@ export default function Navbar() {
               2
             </span>
           </button>
-          <Link
-            to="/"
-            className="hidden font-medium text-white/70 hover:text-white md:inline-flex"
-          >
+          <Link to="/" className="hidden font-medium text-white/70 hover:text-white md:inline-flex">
             Sign in
           </Link>
         </div>

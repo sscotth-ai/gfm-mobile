@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
+import Markdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/animations";
 
@@ -22,8 +23,9 @@ export default function CampaignStory({ description }: CampaignStoryProps) {
               ? "gfm-copy [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:font-display [&>h3]:text-[24px] [&>h3]:font-semibold [&>h3]:text-white [&>li]:mb-2 [&>li]:text-white/70 [&>p]:mb-5 [&>p]:text-white/70 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6 [&_strong]:text-white [&_em]:text-[#0df29e]/80"
               : "gfm-copy max-h-[380px] overflow-hidden [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:font-display [&>h3]:text-[24px] [&>h3]:font-semibold [&>h3]:text-white [&>li]:mb-2 [&>li]:text-white/70 [&>p]:mb-5 [&>p]:text-white/70 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6 [&_strong]:text-white [&_em]:text-[#0df29e]/80"
           }
-          dangerouslySetInnerHTML={{ __html: description }}
-        />
+        >
+          <Markdown>{description}</Markdown>
+        </div>
 
         {!expanded && (
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent" />
