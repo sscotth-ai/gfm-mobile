@@ -2,7 +2,7 @@
 
 ## Instrumentation
 
-The app includes a custom metrics system (`src/lib/metrics.ts`) that tracks events across four categories. In development, all events are logged to the browser console as `[metrics]` lines.
+The app includes a custom metrics system (`src/lib/metrics.ts`) that tracks events across five categories. All events are logged to the browser console as `[metrics]` lines.
 
 ### Performance
 
@@ -70,11 +70,11 @@ All metrics are forwarded to [PostHog](https://posthog.com) as structured wide e
 | `VITE_PUBLIC_POSTHOG_KEY` | PostHog project API key |
 | `VITE_PUBLIC_POSTHOG_HOST` | PostHog ingest endpoint (reverse proxy to avoid ad blockers) |
 
-Set these in `.env.local` for local dev. They are configured as GitHub Actions secrets for CI/deploy. If `VITE_PUBLIC_POSTHOG_KEY` is not set, PostHog is silently skipped.
+Set `VITE_PUBLIC_POSTHOG_KEY` in `.env.local` for local dev. `VITE_PUBLIC_POSTHOG_HOST` is optional and defaults to `https://us.i.posthog.com`, but can be set to a reverse proxy to avoid ad blockers. They are configured as GitHub Actions secrets for CI/deploy. If `VITE_PUBLIC_POSTHOG_KEY` is not set, PostHog is silently skipped.
 
 ### Architecture
 
-- **`MetricsCollector`** (`src/lib/metrics.ts`) — Singleton that buffers events and logs them in dev
+- **`MetricsCollector`** (`src/lib/metrics.ts`) — Singleton that buffers events, forwards them to PostHog, and logs them to the console
 - **`trackedFetch`** — Wraps `fetch()` to automatically measure API response times
 - **Hooks** (`src/hooks/useMetrics.ts`):
   - `usePageView()` — Tracks route changes via React Router
@@ -83,4 +83,3 @@ Set these in `.env.local` for local dev. They are configured as GitHub Actions s
   - `useTrackClick(event, data)` — Click event wrapper
 - **Web vitals** are initialized once in `App.tsx`
 - **Direct `metrics.track()` calls** are used inline for interaction events in components
-
