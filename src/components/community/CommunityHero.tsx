@@ -7,7 +7,6 @@ import type { Community } from "@/types";
 import { fadeUp } from "@/lib/animations";
 import { formatNumber } from "@/lib/format";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import CommunityStats from "@/components/community/CommunityStats";
 
@@ -27,134 +26,119 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
 
   return (
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate}>
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,533px)_minmax(0,1fr)] lg:gap-10">
-        <div className="space-y-4">
-          <div className="overflow-hidden rounded-[24px] bg-gradient-to-b from-[#ffc736] via-[#f9a414] to-[#c97a0b]">
-            {showBannerFallback ? (
-              <div className="aspect-[4/3] w-full bg-gradient-to-br from-[#1dbf9f] to-[#10b981]" />
-            ) : (
-              <img
-                src={community.bannerUrl}
-                alt="Community Header Photo"
-                onError={() => setBannerError(true)}
-                className="aspect-[4/3] w-full scale-[1.08] object-cover object-top"
-              />
-            )}
-          </div>
-
-          <div className="flex items-center justify-between lg:hidden">
-            <div className="flex items-center">
-              <div className="flex -space-x-3">
-                {avatars.map((entry) => (
-                  <Avatar
-                    key={entry.rank}
-                    className="size-10 border-2 border-white shadow-[0_0_0_1px_#e3e2dd]"
-                  >
-                    {entry.organizerAvatarUrl ? (
-                      <AvatarImage src={entry.organizerAvatarUrl} alt={entry.organizerName} />
-                    ) : null}
-                    <AvatarFallback className="bg-[#f7f5f2] text-[#6f7069]">
-                      {entry.organizerName.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                ))}
-              </div>
-              <span className="ml-4 font-medium text-[#232323]">
-                {formatNumber(community.stats.followerCount)} followers
-              </span>
-            </div>
-
-            <Button variant="outline" className="h-10">
-              Follow
-            </Button>
-          </div>
+      {/* Full-bleed hero banner */}
+      <div className="relative -mx-4 -mt-[88px] sm:-mx-6 sm:-mt-[96px] overflow-hidden">
+        <div className="relative h-[420px] sm:h-[500px]">
+          {showBannerFallback ? (
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0df29e]/20 via-[#050505] to-[#FF2E93]/10" />
+          ) : (
+            <img
+              src={community.bannerUrl}
+              alt="Community Header"
+              onError={() => setBannerError(true)}
+              className="absolute inset-0 size-full object-cover"
+            />
+          )}
+          {/* Gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
         </div>
 
-        <div className="flex flex-col justify-center gap-5">
-          <div className="gfm-chip w-fit">
-            <Users className="size-3.5" />
-            Community
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="gfm-display text-[44px] leading-[0.98] sm:text-[56px]">
-              {community.name}
-            </h1>
-            {community.isVerified && (
-              <Badge className="rounded-full bg-[#232323] px-3 py-1 text-[14px] text-white hover:bg-[#232323]">
-                <Check className="size-3.5" />
-                Verified
-              </Badge>
-            )}
-          </div>
-
-          <div className="max-w-2xl">
-            <p
-              className={
-                expanded
-                  ? "text-[18px] leading-8 text-[#4f504a]"
-                  : "line-clamp-5 text-[18px] leading-8 text-[#4f504a]"
-              }
-            >
-              {description}
-            </p>
-            <button
-              className="mt-2 text-[15px] font-medium text-[#274a34] hover:underline"
-              onClick={() => setExpanded((value) => !value)}
-            >
-              {expanded ? "Show less" : "read more"}
-            </button>
-          </div>
-
-          <div className="hidden flex-wrap items-center gap-3 text-[16px] text-[#6f7069] lg:flex">
-            <div className="flex items-center">
-              <div className="flex -space-x-3">
-                {avatars.map((entry) => (
-                  <Avatar
-                    key={entry.rank}
-                    className="size-10 border-2 border-white shadow-[0_0_0_1px_#e3e2dd]"
-                  >
-                    {entry.organizerAvatarUrl ? (
-                      <AvatarImage src={entry.organizerAvatarUrl} alt={entry.organizerName} />
-                    ) : null}
-                    <AvatarFallback className="bg-[#f7f5f2] text-[#6f7069]">
-                      {entry.organizerName.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                ))}
-              </div>
-              <span className="ml-4 font-medium text-[#232323]">
-                {formatNumber(community.stats.followerCount)} followers
+        {/* Content overlay at bottom of hero */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-8 sm:px-6">
+          <div className="gfm-shell">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-semibold uppercase tracking-widest text-[#0df29e]">
+                <Users className="size-3.5" />
+                Community
               </span>
+              {community.isVerified && (
+                <span className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-semibold uppercase tracking-widest text-white">
+                  <Check className="size-3" />
+                  Verified
+                </span>
+              )}
             </div>
 
-            <Button variant="outline" className="h-10">
-              Follow
-            </Button>
-            <Button variant="outline" className="h-10 px-4">
-              <Share2 className="size-4" />
-              Share
-            </Button>
+            <h1 className="font-display text-[48px] font-bold leading-[0.95] tracking-tight text-white text-shadow sm:text-[64px]">
+              {community.name}
+            </h1>
+
+            {community.tagline && (
+              <p className="mt-3 text-[18px] text-[#0df29e] font-medium">{community.tagline}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Below-hero content */}
+      <div className="mt-8 space-y-6">
+        {/* Description */}
+        <div className="max-w-2xl">
+          <p
+            className={
+              expanded
+                ? "text-[18px] leading-8 text-white/60"
+                : "line-clamp-3 text-[18px] leading-8 text-white/60"
+            }
+          >
+            {description}
+          </p>
+          <button
+            className="mt-2 text-[15px] font-medium text-[#0df29e] hover:text-[#0df29e]/80"
+            onClick={() => setExpanded((value) => !value)}
+          >
+            {expanded ? "Show less" : "Read more"}
+          </button>
+        </div>
+
+        {/* Follower row + actions */}
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center">
+            <div className="flex -space-x-3">
+              {avatars.map((entry) => (
+                <Avatar
+                  key={entry.rank}
+                  className="size-10 border-2 border-[#050505] shadow-[0_0_0_1px_rgba(255,255,255,0.12)]"
+                >
+                  {entry.organizerAvatarUrl ? (
+                    <AvatarImage src={entry.organizerAvatarUrl} alt={entry.organizerName} />
+                  ) : null}
+                  <AvatarFallback className="bg-white/8 text-white/50">
+                    {entry.organizerName.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              ))}
+            </div>
+            <span className="ml-4 font-medium text-white/60">
+              {formatNumber(community.stats.followerCount)} followers
+            </span>
           </div>
 
-          <Button variant="outline" className="h-10 w-fit px-4 lg:hidden">
+          <Button className="h-10 rounded-full bg-[#0df29e] text-[#050505] font-semibold hover:bg-[#0df29e]/90 neon-glow">
+            Follow
+          </Button>
+          <Button
+            variant="outline"
+            className="h-10 rounded-full border-white/12 px-4 text-white/70 hover:bg-white/8 hover:text-white"
+          >
             <Share2 className="size-4" />
             Share
           </Button>
-
-          {community.location && (
-            <p className="flex items-center gap-2 text-[16px] text-[#6f7069]">
-              <MapPin className="size-4" />
-              {community.location}
-            </p>
-          )}
-
-          <CommunityStats stats={community.stats} />
-
-          <Button className="h-12 w-full max-w-[220px] bg-[#274a34] text-white hover:bg-[#1f3b29]">
-            Start a GoFundMe
-          </Button>
         </div>
+
+        {community.location && (
+          <p className="flex items-center gap-2 text-[16px] text-white/40">
+            <MapPin className="size-4" />
+            {community.location}
+          </p>
+        )}
+
+        <CommunityStats stats={community.stats} />
+
+        <Button className="h-12 w-full max-w-[220px] rounded-full bg-white/8 border border-white/12 text-white font-semibold hover:bg-white/12">
+          Start a GoFundMe
+        </Button>
       </div>
     </motion.div>
   );

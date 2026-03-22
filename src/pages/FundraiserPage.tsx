@@ -22,7 +22,6 @@ export default function FundraiserPage() {
   const { data: campaign, isLoading } = useCampaign(slug ?? "");
   const [donateOpen, setDonateOpen] = useState(false);
 
-  // Metrics
   const storyRef = useTrackVisibility("campaign_story");
   const donationsRef = useTrackVisibility("donations_list");
   const supportRef = useTrackVisibility("words_of_support");
@@ -38,7 +37,14 @@ export default function FundraiserPage() {
   }
 
   if (isLoading || !campaign) {
-    return <div className="py-12 text-center text-muted-foreground">Loading...</div>;
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="size-8 animate-spin rounded-full border-2 border-[#0df29e] border-t-transparent" />
+          <span className="text-sm text-white/40">Loading campaign...</span>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -65,7 +71,7 @@ export default function FundraiserPage() {
               />
               <div className="mt-4 flex gap-3">
                 <Button
-                  className="flex-1 bg-[#ccf88e] text-[#274a34] hover:bg-[#c2f27f]"
+                  className="flex-1 rounded-full bg-[#0df29e] text-[#050505] font-semibold hover:bg-[#0df29e]/90 neon-glow"
                   onClick={() => handleDonateClick("mobile_progress")}
                 >
                   Donate now

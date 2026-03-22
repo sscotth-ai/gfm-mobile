@@ -21,27 +21,27 @@ export default function DonationItem({ donation, compact = false }: DonationItem
       animate={staggerItem.animate}
       className="flex items-start gap-3"
     >
-      <Avatar className="size-10 border border-[#e3e2dd]">
+      <Avatar className="size-10 border border-white/12">
         {donation.donorAvatarUrl && !donation.isAnonymous ? (
           <AvatarImage src={donation.donorAvatarUrl} alt={displayName} />
         ) : null}
-        <AvatarFallback className="bg-[#f7f5f2] text-[#6f7069]">
+        <AvatarFallback className="bg-white/8 text-white/50">
           {donation.isAnonymous ? <User className="size-4" /> : displayName.charAt(0).toUpperCase()}
         </AvatarFallback>
       </Avatar>
 
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-baseline gap-2">
-          <span className="text-[15px] font-semibold text-[#232323]">{displayName}</span>
-          <span className="text-[15px] font-semibold text-[#232323]">
+          <span className="text-[15px] font-semibold text-white">{displayName}</span>
+          <span className="text-[15px] font-semibold text-[#0df29e]">
             {formatCurrency(donation.amount)}
           </span>
         </div>
 
-        <p className="text-[14px] text-[#6f7069]">{formatRelativeTime(donation.createdAt)}</p>
+        <p className="text-[14px] text-white/40">{formatRelativeTime(donation.createdAt)}</p>
 
         {!compact && donation.message && (
-          <p className="mt-2 text-[15px] leading-6 text-[#4f504a]">{donation.message}</p>
+          <p className="mt-2 text-[15px] leading-6 text-white/60">{donation.message}</p>
         )}
       </div>
     </motion.div>

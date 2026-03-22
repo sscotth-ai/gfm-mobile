@@ -19,16 +19,16 @@ export default function DonationProgress({
 
   return (
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate} className="space-y-3">
-      <p className="text-[17px] text-[#6f7069]">
-        <span className="text-[24px] font-semibold text-[#232323]">
+      <p className="text-[17px] text-white/50">
+        <span className="text-[24px] font-semibold text-[#0df29e]">
           {formatCurrency(raisedAmount)}
         </span>{" "}
         raised of {formatCurrency(goalAmount)} goal
       </p>
 
-      <div className="h-2 w-full overflow-hidden rounded-full bg-[#ece9e4]">
+      <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
         <motion.div
-          className="h-full rounded-full bg-[#69c65b]"
+          className="neon-bar h-full rounded-full"
           initial={{ width: "0%" }}
           whileInView={{ width: `${percentage}%` }}
           transition={{ duration: 1, ease: easeOut }}
@@ -36,7 +36,7 @@ export default function DonationProgress({
         />
       </div>
 
-      <p className="text-[15px] text-[#6f7069]">{formatNumber(donationCount)} donations</p>
+      <p className="text-[15px] text-white/40">{formatNumber(donationCount)} donations</p>
     </motion.div>
   );
 }

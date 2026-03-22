@@ -5,7 +5,6 @@ import { ExternalLink, Check } from "lucide-react";
 import type { Community } from "@/types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import CampaignCard from "@/components/community/CampaignCard";
 
 interface CommunityTabsProps {
@@ -37,7 +36,11 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
 
         {!showAll && community.campaigns.length > INITIAL_VISIBLE && (
           <div className="mt-6 flex justify-center">
-            <Button variant="outline" onClick={() => setShowAll(true)}>
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(true)}
+              className="rounded-full border-white/12 text-white/70 hover:bg-white/8 hover:text-white"
+            >
               Show more
             </Button>
           </div>
@@ -46,7 +49,7 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
 
       <TabsContent value="about" className="pt-2">
         <div
-          className="gfm-copy [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:text-[24px] [&>h3]:font-semibold [&>li]:mb-2 [&>p]:mb-5 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6"
+          className="gfm-copy [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:font-display [&>h3]:text-[24px] [&>h3]:font-semibold [&>h3]:text-white [&>li]:mb-2 [&>li]:text-white/70 [&>p]:mb-5 [&>p]:text-white/70 [&>ul]:mb-5 [&>ul]:list-disc [&>ul]:pl-6 [&_strong]:text-white"
           dangerouslySetInnerHTML={{ __html: community.description }}
         />
 
@@ -55,7 +58,7 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
             href={community.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-medium text-[#274a34] hover:underline"
+            className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-medium text-[#0df29e] hover:text-[#0df29e]/80"
           >
             <ExternalLink className="size-4" />
             {community.website}
@@ -64,10 +67,10 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
 
         {community.isNonprofit && (
           <div className="mt-4 flex gap-2">
-            <Badge variant="secondary" className="gap-1 rounded-full bg-[#f7f5f2] text-[#232323]">
+            <span className="gfm-chip gap-1">
               <Check className="size-3" />
               Nonprofit
-            </Badge>
+            </span>
           </div>
         )}
       </TabsContent>

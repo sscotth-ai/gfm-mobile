@@ -19,7 +19,14 @@ export default function CommunityPage() {
   }, []);
 
   if (isLoading || !community) {
-    return <div className="py-12 text-center text-muted-foreground">Loading...</div>;
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="size-8 animate-spin rounded-full border-2 border-[#0df29e] border-t-transparent" />
+          <span className="text-sm text-white/40">Loading community...</span>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -21,7 +21,7 @@ export default function DonationsList({ donations, compact = false }: DonationsL
 
   return (
     <div className="space-y-4">
-      <h3 className="text-[18px] font-semibold text-[#232323]">Donations ({total})</h3>
+      <h3 className="font-display text-[18px] font-semibold text-white">Donations ({total})</h3>
 
       <motion.div initial="initial" animate={staggerContainer.animate} className="space-y-4">
         {visibleDonations.map((donation) => (
@@ -33,7 +33,7 @@ export default function DonationsList({ donations, compact = false }: DonationsL
         <Button
           variant="outline"
           onClick={() => setExpanded((prev) => !prev)}
-          className="h-11 px-5 text-[15px]"
+          className="h-11 rounded-full border-white/12 px-5 text-[15px] text-white/70 hover:bg-white/8 hover:text-white"
         >
           {expanded ? "Show less" : `See all ${total}`}
         </Button>

@@ -25,28 +25,28 @@ export default function CampaignHeader({
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate} className="space-y-5">
       <h1 className="gfm-display max-w-4xl text-[44px] leading-[0.96] sm:text-[56px]">{title}</h1>
 
-      <div className="flex flex-wrap items-center gap-3 text-[15px] text-[#6f7069]">
+      <div className="flex flex-wrap items-center gap-3 text-[15px] text-white/50">
         <Link
           to={`/u/${organizer.username}`}
-          className="flex items-center gap-3 hover:text-[#232323]"
+          className="flex items-center gap-3 hover:text-white"
         >
-          <Avatar className="size-11 border border-[#e3e2dd]">
+          <Avatar className="size-11 border border-white/12">
             <AvatarImage src={organizer.avatarUrl} alt={organizer.displayName} />
-            <AvatarFallback className="bg-[#f7f5f2] text-[#274a34]">
+            <AvatarFallback className="bg-white/8 text-[#0df29e]">
               {organizer.displayName.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
-          <span className="font-semibold text-[#232323]">{organizer.displayName}</span>
+          <span className="font-semibold text-white">{organizer.displayName}</span>
         </Link>
 
-        <span className="text-[#c2c0bb]">&middot;</span>
+        <span className="text-white/20">&middot;</span>
 
         <span className="inline-flex items-center gap-1.5">
           <MapPin className="size-4" />
           {organizer.location}
         </span>
 
-        <span className="text-[#c2c0bb]">&middot;</span>
+        <span className="text-white/20">&middot;</span>
 
         <span className="inline-flex items-center gap-1.5">
           <Calendar className="size-4" />

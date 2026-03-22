@@ -41,7 +41,7 @@ export default function ShareOptions({ campaignTitle, className }: ShareOptionsP
           <Button
             variant="secondary"
             className={cn(
-              "bg-[#274a34] text-[#ccf88e] hover:bg-[#1f3b29] hover:text-[#ccf88e]",
+              "rounded-full border border-white/12 bg-white/8 text-white hover:bg-white/12 hover:text-white",
               className,
             )}
           />
@@ -50,28 +50,28 @@ export default function ShareOptions({ campaignTitle, className }: ShareOptionsP
         <Link className="size-4" />
         Share
       </SheetTrigger>
-      <SheetContent side="bottom">
+      <SheetContent side="bottom" className="border-white/12 bg-[#111] text-white">
         <SheetHeader>
-          <SheetTitle>Share this fundraiser</SheetTitle>
+          <SheetTitle className="text-white">Share this fundraiser</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-2 px-4 pb-4">
-          <Button variant="ghost" className="w-full justify-start py-3" onClick={handleCopyLink}>
+          <Button variant="ghost" className="w-full justify-start py-3 text-white/70 hover:bg-white/8 hover:text-white" onClick={handleCopyLink}>
             <Link className="size-4" />
             {copied ? "Copied!" : "Copy link"}
           </Button>
-          <Button variant="ghost" className="w-full justify-start py-3" onClick={handleShareX}>
+          <Button variant="ghost" className="w-full justify-start py-3 text-white/70 hover:bg-white/8 hover:text-white" onClick={handleShareX}>
             <Twitter className="size-4" />
             Share on X
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start py-3"
+            className="w-full justify-start py-3 text-white/70 hover:bg-white/8 hover:text-white"
             onClick={handleShareFacebook}
           >
             <Facebook className="size-4" />
             Share on Facebook
           </Button>
-          <Button variant="ghost" className="w-full justify-start py-3" onClick={handleShareEmail}>
+          <Button variant="ghost" className="w-full justify-start py-3 text-white/70 hover:bg-white/8 hover:text-white" onClick={handleShareEmail}>
             <Mail className="size-4" />
             Share via Email
           </Button>

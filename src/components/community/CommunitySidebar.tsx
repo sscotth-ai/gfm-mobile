@@ -14,7 +14,10 @@ export default function CommunitySidebar({ community }: CommunitySidebarProps) {
   return (
     <motion.div initial="initial" animate={staggerContainer.animate} className="gfm-card p-6">
       <Leaderboard entries={community.topFundraisers} total={community.stats.fundraiserCount} />
-      <Button variant="outline" className="mt-5 w-full">
+      <Button
+        variant="outline"
+        className="mt-5 w-full rounded-full border-white/12 text-white/70 hover:bg-white/8 hover:text-white"
+      >
         See all
       </Button>
     </motion.div>

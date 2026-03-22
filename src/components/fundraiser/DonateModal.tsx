@@ -29,7 +29,6 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
   const [includeTip, setIncludeTip] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Reset all state when the dialog closes
   useEffect(() => {
     if (!open) {
       setSelectedAmount(null);
@@ -41,7 +40,6 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
   }, [open]);
 
   const effectiveAmount = showCustom ? parseFloat(customAmount) || null : selectedAmount;
-
   const totalAmount = effectiveAmount ? effectiveAmount + (includeTip ? TIP_AMOUNT : 0) : null;
 
   function handlePresetSelect(amount: number) {
@@ -67,7 +65,7 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="border-white/12 bg-[#111] text-white sm:max-w-md">
         <AnimatePresence mode="wait">
           {!submitted ? (
             <motion.div
@@ -77,13 +75,12 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
               exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
             >
               <DialogHeader>
-                <DialogTitle>Choose a donation amount</DialogTitle>
-                <DialogDescription>
+                <DialogTitle className="text-white">Choose a donation amount</DialogTitle>
+                <DialogDescription className="text-white/50">
                   Select a preset amount or enter a custom value.
                 </DialogDescription>
               </DialogHeader>
 
-              {/* Preset amount grid */}
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {PRESET_AMOUNTS.map((amount) => (
                   <motion.button
@@ -91,10 +88,10 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
                     type="button"
                     {...buttonPress}
                     onClick={() => handlePresetSelect(amount)}
-                    className={`flex h-12 items-center justify-center rounded-lg border text-sm font-medium transition-colors ${
+                    className={`flex h-12 items-center justify-center rounded-2xl border text-sm font-medium transition-colors ${
                       !showCustom && selectedAmount === amount
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-background hover:bg-muted"
+                        ? "border-[#0df29e] bg-[#0df29e]/10 text-[#0df29e] shadow-[0_0_15px_rgba(13,242,158,0.15)]"
+                        : "border-white/12 bg-white/5 text-white hover:bg-white/10"
                     }`}
                   >
                     {formatCurrency(amount)}
@@ -102,15 +99,18 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
                 ))}
               </div>
 
-              {/* Other amount button / custom input */}
               <div className="mt-3">
                 {!showCustom ? (
-                  <Button variant="outline" className="w-full" onClick={handleShowCustom}>
+                  <Button
+                    variant="outline"
+                    className="w-full rounded-full border-white/12 text-white/70 hover:bg-white/8 hover:text-white"
+                    onClick={handleShowCustom}
+                  >
                     Other amount
                   </Button>
                 ) : (
-                  <div className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50">
-                    <span className="text-sm text-muted-foreground">$</span>
+                  <div className="flex items-center gap-2 rounded-2xl border border-[#0df29e]/40 bg-white/5 px-3 py-2 focus-within:border-[#0df29e] focus-within:shadow-[0_0_10px_rgba(13,242,158,0.15)]">
+                    <span className="text-sm text-white/50">$</span>
                     <input
                       type="number"
                       min="1"
@@ -118,18 +118,17 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
                       placeholder="Enter amount"
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
-                      className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                      className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/30"
                       autoFocus
                     />
                   </div>
                 )}
               </div>
 
-              <Separator className="my-4" />
+              <Separator className="my-4 bg-white/10" />
 
-              {/* Tip toggle */}
               <label className="flex cursor-pointer items-center justify-between gap-3">
-                <span className="text-sm">
+                <span className="text-sm text-white/70">
                   Include a {formatCurrency(TIP_AMOUNT)} tip to help the platform
                 </span>
                 <button
@@ -138,7 +137,7 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
                   aria-checked={includeTip}
                   onClick={() => setIncludeTip(!includeTip)}
                   className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${
-                    includeTip ? "bg-primary" : "bg-muted"
+                    includeTip ? "bg-[#0df29e]" : "bg-white/20"
                   }`}
                 >
                   <span
@@ -151,7 +150,7 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
 
               <DialogFooter className="mt-4">
                 <Button
-                  className="w-full bg-heart text-heart-foreground hover:bg-heart/90"
+                  className="w-full rounded-full bg-[#0df29e] text-[#050505] font-semibold hover:bg-[#0df29e]/90 neon-glow"
                   disabled={!effectiveAmount || effectiveAmount <= 0}
                   onClick={handleContinue}
                 >
@@ -169,19 +168,21 @@ export default function DonateModal({ open, onOpenChange }: DonateModalProps) {
               exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
               className="flex flex-col items-center py-6 text-center"
             >
-              {/* Success icon */}
-              <div className="flex size-16 items-center justify-center rounded-full bg-success/10">
-                <Check className="size-8 text-success" />
+              <div className="flex size-16 items-center justify-center rounded-full bg-[#0df29e]/15">
+                <Check className="size-8 text-[#0df29e]" />
               </div>
 
-              <h2 className="mt-4 text-lg font-semibold">Thank you!</h2>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <h2 className="mt-4 text-lg font-semibold text-white">Thank you!</h2>
+              <p className="mt-2 text-sm text-white/50">
                 Your donation of {totalAmount ? formatCurrency(totalAmount) : ""} will make a
                 difference.
               </p>
 
               <DialogFooter className="mt-6 w-full">
-                <Button className="w-full" onClick={handleDone}>
+                <Button
+                  className="w-full rounded-full bg-[#0df29e] text-[#050505] font-semibold hover:bg-[#0df29e]/90"
+                  onClick={handleDone}
+                >
                   Done
                 </Button>
               </DialogFooter>

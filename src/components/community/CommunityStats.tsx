@@ -22,14 +22,14 @@ export default function CommunityStats({ stats }: CommunityStatsProps) {
       initial="initial"
       animate="animate"
       variants={staggerContainer}
-      className="grid grid-cols-2 gap-5 border-y border-[#e3e2dd] py-5 sm:grid-cols-4"
+      className="glass grid grid-cols-2 gap-5 rounded-[24px] p-5 sm:grid-cols-4"
     >
       {statItems.map((item) => (
         <motion.div key={item.key} variants={staggerItem} className="text-left sm:text-center">
-          <p className="text-[20px] font-semibold text-[#232323] sm:text-[28px]">
+          <p className="font-display text-[22px] font-bold text-[#0df29e] sm:text-[28px]">
             {item.format(stats[item.key])}
           </p>
-          <p className="text-[14px] text-[#6f7069] sm:text-[15px]">{item.label}</p>
+          <p className="text-[14px] text-white/40 sm:text-[15px]">{item.label}</p>
         </motion.div>
       ))}
     </motion.div>
