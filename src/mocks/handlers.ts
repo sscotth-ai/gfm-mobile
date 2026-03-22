@@ -1,6 +1,13 @@
 import { http, HttpResponse, delay } from "msw";
 import mockData from "@/data/mock.json";
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+function fixPaths<T>(obj: T): T {
+  const json = JSON.stringify(obj);
+  return JSON.parse(json.replace(/"\/images\//g, `"${BASE}/images/`));
+}
+
 export const handlers = [
   // Get campaign by slug
   http.get("/api/campaigns/:slug", async ({ params }) => {
@@ -11,7 +18,7 @@ export const handlers = [
       return HttpResponse.json({ error: "Campaign not found" }, { status: 404 });
     }
 
-    return HttpResponse.json(mockData.campaign);
+    return HttpResponse.json(fixPaths(mockData.campaign));
   }),
 
   // Get paginated donations for a campaign
@@ -26,12 +33,12 @@ export const handlers = [
     const start = (page - 1) * limit;
     const paginated = donations.slice(start, start + limit);
 
-    return HttpResponse.json({
+    return HttpResponse.json(fixPaths({
       donations: paginated,
       total: donations.length,
       page,
       totalPages: Math.ceil(donations.length / limit),
-    });
+    }));
   }),
 
   // Submit a donation
@@ -64,7 +71,7 @@ export const handlers = [
       return HttpResponse.json({ error: "Profile not found" }, { status: 404 });
     }
 
-    return HttpResponse.json(mockData.profile);
+    return HttpResponse.json(fixPaths(mockData.profile));
   }),
 
   // Get community
@@ -76,6 +83,6 @@ export const handlers = [
       return HttpResponse.json({ error: "Community not found" }, { status: 404 });
     }
 
-    return HttpResponse.json(mockData.community);
+    return HttpResponse.json(fixPaths(mockData.community));
   }),
 ];
