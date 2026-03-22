@@ -1,3 +1,5 @@
+import { posthog } from "@/lib/posthog";
+
 type MetricCategory = "performance" | "engagement" | "conversion" | "navigation" | "error";
 
 interface MetricEvent {
@@ -22,6 +24,13 @@ class MetricsCollector {
     };
 
     this.buffer.push(event);
+
+    // Wide event: one structured capture per metric with full context
+    posthog.capture(name, {
+      category,
+      ...data,
+      path: window.location.pathname,
+    });
 
     console.log(
       `%c[metrics] %c${category}%c ${name}`,
