@@ -349,12 +349,12 @@ function ActivityItem({
         </button>
         <button
           onClick={() => setShowCommentInput((prev) => !prev)}
-          className={`inline-flex h-8 items-center gap-2 transition-colors ${
+          className={`inline-flex h-8 min-w-[3rem] items-center gap-2 transition-colors ${
             showCommentInput ? "text-white" : "text-white/30 hover:text-white"
           }`}
         >
           <MessageCircle className="size-4" />
-          <span className="text-[14px] leading-none">{comments.length}</span>
+          <span className="text-[14px] leading-none tabular-nums">{comments.length}</span>
         </button>
         <button
           onClick={handleShare}
