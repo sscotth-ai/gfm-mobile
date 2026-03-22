@@ -4,6 +4,7 @@ import { Send } from "lucide-react";
 import type { Comment } from "@/types";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { formatRelativeTime } from "@/lib/format";
+import { metrics } from "@/lib/metrics";
 
 interface CommentsDrawerProps {
   open: boolean;
@@ -50,6 +51,9 @@ export default function CommentsDrawer({
     setComments((prev) => [newComment, ...prev]);
     setText("");
     inputRef.current?.focus();
+    metrics.track("comment_posted", "engagement", {
+      length: trimmed.length,
+    });
   }
 
   return (

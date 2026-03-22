@@ -1,12 +1,20 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PageShell from "@/components/layout/PageShell";
+import { metrics } from "@/lib/metrics";
+import { usePageView } from "@/hooks/useMetrics";
 
 const FundraiserPage = lazy(() => import("@/pages/FundraiserPage"));
 const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
 
 export default function App() {
+  useEffect(() => {
+    metrics.trackWebVitals();
+  }, []);
+
+  usePageView();
+
   return (
     <Routes>
       {/* Immersive fundraiser — rendered outside PageShell */}

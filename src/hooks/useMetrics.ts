@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { metrics } from "@/lib/metrics";
 
 /**
@@ -40,6 +41,19 @@ export function useTrackClick(
   return useCallback(() => {
     metrics.track(eventName, "conversion", data);
   }, [eventName, data]);
+}
+
+/**
+ * Track page views on navigation.
+ */
+export function usePageView() {
+  const location = useLocation();
+
+  useEffect(() => {
+    metrics.track("page_view", "navigation", {
+      path: location.pathname,
+    });
+  }, [location.pathname]);
 }
 
 /**

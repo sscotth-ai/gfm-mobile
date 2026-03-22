@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import type { CampaignSummary } from "@/types";
 import { formatCurrency } from "@/lib/format";
 import { fadeUp } from "@/lib/animations";
+import { metrics } from "@/lib/metrics";
 
 interface CampaignCardProps {
   campaign: CampaignSummary;
@@ -17,7 +18,16 @@ export default function CampaignCard({ campaign }: CampaignCardProps) {
 
   return (
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate}>
-      <Link to={`/fundraiser/${campaign.slug}`} className="group block">
+      <Link
+        to={`/fundraiser/${campaign.slug}`}
+        className="group block"
+        onClick={() => {
+          metrics.track("campaign_card_click", "navigation", {
+            slug: campaign.slug,
+            title: campaign.title,
+          });
+        }}
+      >
         <div className="gfm-card overflow-hidden transition-all hover:shadow-[0_8px_40px_rgba(13,242,158,0.08)] hover:border-white/20">
           <div className="aspect-[16/9] overflow-hidden bg-white/5">
             {imgError ? (
@@ -27,7 +37,13 @@ export default function CampaignCard({ campaign }: CampaignCardProps) {
                 src={campaign.imageUrl}
                 alt={campaign.title}
                 className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                onError={() => setImgError(true)}
+                onError={() => {
+                  setImgError(true);
+                  metrics.track("image_load_error", "error", {
+                    component: "CampaignCard",
+                    slug: campaign.slug,
+                  });
+                }}
               />
             )}
           </div>
