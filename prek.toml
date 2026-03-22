@@ -1,0 +1,41 @@
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "lint"
+name = "pnpm lint"
+language = "system"
+entry = "pnpm lint"
+pass_filenames = false
+stages = ["pre-commit"]
+
+[[repos.hooks]]
+id = "format-check"
+name = "pnpm format:check"
+language = "system"
+entry = "pnpm format:check"
+pass_filenames = false
+stages = ["pre-commit"]
+
+[[repos.hooks]]
+id = "test"
+name = "pnpm test"
+language = "system"
+entry = "pnpm test"
+pass_filenames = false
+stages = ["pre-commit"]
+
+[[repos.hooks]]
+id = "build"
+name = "pnpm build"
+language = "system"
+entry = "pnpm build"
+pass_filenames = false
+stages = ["pre-commit"]
+
+[[repos.hooks]]
+id = "cog-verify"
+name = "cog verify"
+language = "system"
+entry = "cog verify --file"
+stages = ["commit-msg"]
