@@ -17,6 +17,8 @@ interface CommunityHeroProps {
 export default function CommunityHero({ community }: CommunityHeroProps) {
   const [bannerError, setBannerError] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [following, setFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(community.stats.followerCount);
   const showBannerFallback = !community.bannerUrl || bannerError;
   const description = community.description
     .replace(/[#*_[\]]/g, "")
@@ -111,16 +113,42 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
               ))}
             </div>
             <span className="ml-4 font-medium text-white/60">
-              {formatNumber(community.stats.followerCount)} followers
+              {formatNumber(followerCount)} followers
             </span>
           </div>
 
-          <Button className="h-10 rounded-full bg-[#0df29e] text-[#050505] font-semibold hover:bg-[#0df29e]/90 neon-glow">
-            Follow
+          <Button
+            className={
+              following
+                ? "h-10 rounded-full border border-white/12 bg-white/8 font-semibold text-white hover:bg-white/12"
+                : "h-10 rounded-full bg-[#0df29e] font-semibold text-[#050505] hover:bg-[#0df29e]/90 neon-glow"
+            }
+            onClick={() => {
+              setFollowing((prev) => !prev);
+              setFollowerCount((prev) => prev + (following ? -1 : 1));
+            }}
+          >
+            {following ? "Following" : "Follow"}
           </Button>
           <Button
             variant="outline"
             className="h-10 rounded-full border-white/12 px-4 text-white/70 hover:bg-white/8 hover:text-white"
+            onClick={async () => {
+              const shareData = {
+                title: community.name,
+                text: community.tagline ?? community.name,
+                url: window.location.href,
+              };
+              try {
+                if (navigator.share) {
+                  await navigator.share(shareData);
+                } else {
+                  await navigator.clipboard.writeText(window.location.href);
+                }
+              } catch {
+                // User cancelled share
+              }
+            }}
           >
             <Share2 className="size-4" />
             Share
@@ -135,10 +163,6 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
         )}
 
         <CommunityStats stats={community.stats} />
-
-        <Button className="h-12 w-full max-w-[220px] rounded-full bg-white/8 border border-white/12 text-white font-semibold hover:bg-white/12">
-          Start a GoFundMe
-        </Button>
       </div>
     </motion.div>
   );
