@@ -61,6 +61,17 @@ The app includes a custom metrics system (`src/lib/metrics.ts`) that tracks even
 | `api_error` | Failed API requests (status + url) | Backend reliability |
 | `image_load_error` | Broken images (with component context) | Asset delivery issues |
 
+### PostHog
+
+All metrics are forwarded to [PostHog](https://posthog.com) as structured wide events via `posthog.capture()` inside `MetricsCollector.track()`. Pageviews are tracked automatically on route changes.
+
+| Variable | Description |
+|---|---|
+| `VITE_PUBLIC_POSTHOG_KEY` | PostHog project API key |
+| `VITE_PUBLIC_POSTHOG_HOST` | PostHog ingest endpoint (reverse proxy to avoid ad blockers) |
+
+Set these in `.env.local` for local dev. They are configured as GitHub Actions secrets for CI/deploy. If `VITE_PUBLIC_POSTHOG_KEY` is not set, PostHog is silently skipped.
+
 ### Architecture
 
 - **`MetricsCollector`** (`src/lib/metrics.ts`) — Singleton that buffers events and logs them in dev
