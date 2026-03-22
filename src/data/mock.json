@@ -61,7 +61,7 @@
       {
         "id": "don_001",
         "donorName": "Priya Raghavan",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=priya",
         "amount": 500,
         "message": "Watch Duty saved our family during the 2025 fires. We owe them everything. Please keep doing this incredible work.",
         "createdAt": "2026-03-15T14:22:00Z",
@@ -79,7 +79,7 @@
       {
         "id": "don_003",
         "donorName": "Marcus Chen",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=marcus",
         "amount": 100,
         "message": "Great cause, Janahan. Sharing with my whole neighborhood group.",
         "createdAt": "2026-03-13T18:30:00Z",
@@ -88,7 +88,7 @@
       {
         "id": "don_004",
         "donorName": "Sarah Lindqvist",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=sarah",
         "amount": 75,
         "message": "Every second counts in a wildfire. Thank you for supporting the people who give us those seconds.",
         "createdAt": "2026-03-12T11:15:00Z",
@@ -97,7 +97,7 @@
       {
         "id": "don_005",
         "donorName": "David Okonkwo",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=david",
         "amount": 200,
         "message": null,
         "createdAt": "2026-03-10T20:05:00Z",
@@ -115,7 +115,7 @@
       {
         "id": "don_007",
         "donorName": "Elena Vasquez",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=elena",
         "amount": 150,
         "message": "My parents live in Napa. Watch Duty is the only app I trust to keep them informed. Donating gladly.",
         "createdAt": "2026-03-07T16:48:00Z",
@@ -124,7 +124,7 @@
       {
         "id": "don_008",
         "donorName": "Tom Brennan",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=tom",
         "amount": 25,
         "message": null,
         "createdAt": "2026-03-05T13:12:00Z",
@@ -133,7 +133,7 @@
       {
         "id": "don_009",
         "donorName": "Aisha Patel",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=aisha",
         "amount": 300,
         "message": "As a first responder myself, I know how critical real-time info is. Watch Duty does it right.",
         "createdAt": "2026-03-03T22:00:00Z",
@@ -151,7 +151,7 @@
       {
         "id": "don_011",
         "donorName": "Kevin Nakamura",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=kevin",
         "amount": 60,
         "message": "Janahan told me about this at work — happy to chip in. Let's hit that goal!",
         "createdAt": "2026-02-25T15:20:00Z",
@@ -160,7 +160,7 @@
       {
         "id": "don_012",
         "donorName": "Rachel Kim",
-        "donorAvatarUrl": null,
+        "donorAvatarUrl": "https://i.pravatar.cc/128?u=rachel",
         "amount": 375,
         "message": "Matching my company's donation. Wildfire preparedness matters more than ever with climate change accelerating.",
         "createdAt": "2026-02-18T08:45:00Z",
@@ -171,56 +171,56 @@
       {
         "id": "com_001",
         "authorName": "Priya Raghavan",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=priya",
         "message": "We evacuated with 20 minutes to spare last October because of a Watch Duty alert. Without it, we would have been caught completely off guard. This nonprofit deserves every penny.",
         "createdAt": "2026-03-15T14:30:00Z"
       },
       {
         "id": "com_002",
         "authorName": "Marcus Chen",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=marcus",
         "message": "Just shared this with our Nextdoor group. Everyone in fire country should know about Watch Duty. Great fundraiser, Janahan!",
         "createdAt": "2026-03-13T18:45:00Z"
       },
       {
         "id": "com_003",
         "authorName": "Janahan Vivekanandan",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=janahan",
         "message": "Thank you all so much for the support! We're over 70% of the way to our goal. Every share helps just as much as every dollar.",
         "createdAt": "2026-03-11T09:00:00Z"
       },
       {
         "id": "com_004",
         "authorName": "Elena Vasquez",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=elena",
         "message": "The fact that real firefighters are the ones monitoring and sending alerts is what makes Watch Duty different from everything else out there. It's not an algorithm — it's human expertise.",
         "createdAt": "2026-03-07T17:00:00Z"
       },
       {
         "id": "com_005",
         "authorName": "Aisha Patel",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=aisha",
         "message": "I work in emergency services and I can confirm: Watch Duty's alerts are often faster and more accurate than official channels. They're filling a gap that desperately needed filling.",
         "createdAt": "2026-03-03T22:15:00Z"
       },
       {
         "id": "com_006",
         "authorName": "Kevin Nakamura",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=kevin",
         "message": "Just installed the app after donating. The level of detail on fire perimeters is incredible. Why isn't this more well-known?",
         "createdAt": "2026-02-25T15:35:00Z"
       },
       {
         "id": "com_007",
         "authorName": "Rachel Kim",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=rachel",
         "message": "My company matched my donation! If your employer has a matching program, check if Watch Duty qualifies — they're a registered 501(c)(3).",
         "createdAt": "2026-02-18T09:00:00Z"
       },
       {
         "id": "com_008",
         "authorName": "Tom Brennan",
-        "authorAvatarUrl": null,
+        "authorAvatarUrl": "https://i.pravatar.cc/128?u=tom",
         "message": "Small donation but sending love from Oregon. We deal with fire season up here too and I wish Watch Duty covered our area. Hopefully this helps them expand.",
         "createdAt": "2026-02-16T14:00:00Z"
       }
