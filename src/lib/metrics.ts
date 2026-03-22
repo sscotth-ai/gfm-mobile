@@ -9,8 +9,6 @@ interface MetricEvent {
 
 class MetricsCollector {
   private buffer: MetricEvent[] = [];
-  private isDev = import.meta.env.DEV;
-
   track(
     name: string,
     category: MetricCategory,
@@ -25,15 +23,13 @@ class MetricsCollector {
 
     this.buffer.push(event);
 
-    if (this.isDev) {
-      console.log(
-        `%c[metrics] %c${category}%c ${name}`,
-        "color: #888",
-        "color: #4ade80; font-weight: bold",
-        "color: inherit",
-        data,
-      );
-    }
+    console.log(
+      `%c[metrics] %c${category}%c ${name}`,
+      "color: #888",
+      "color: #4ade80; font-weight: bold",
+      "color: inherit",
+      data,
+    );
   }
 
   trackWebVitals() {
@@ -157,7 +153,7 @@ class MetricsCollector {
   }
 
   flush() {
-    if (this.isDev && this.buffer.length > 0) {
+    if (this.buffer.length > 0) {
       console.table(
         this.buffer.map((e) => ({
           name: e.name,
