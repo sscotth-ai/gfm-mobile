@@ -10,6 +10,7 @@ export function useCampaign(slug: string) {
       return res.json();
     },
     enabled: !!slug,
+    retry: false,
   });
 }
 
@@ -22,6 +23,7 @@ export function useCommunity(slug: string) {
       return res.json();
     },
     enabled: !!slug,
+    retry: false,
   });
 }
 
@@ -34,5 +36,6 @@ export function useProfile(username: string) {
       return res.json();
     },
     enabled: !!username,
+    retry: false,
   });
 }

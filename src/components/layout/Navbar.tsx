@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 flex h-[72px] items-center border-b transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 flex h-[48px] items-center border-b transition-all duration-300 md:h-[72px]",
         scrolled
           ? "border-white/10 bg-[#050505]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           : "border-transparent bg-transparent",
@@ -43,7 +43,7 @@ export default function Navbar() {
           aria-label="GoFundMe"
           className="mx-auto flex items-center gap-2 md:absolute md:left-1/2 md:-translate-x-1/2"
         >
-          <span className="font-display text-[22px] font-bold tracking-tighter text-[#0df29e] drop-shadow-[0_0_10px_rgba(13,242,158,0.4)]">
+          <span className="font-display text-[18px] font-bold tracking-tighter text-[#0df29e] drop-shadow-[0_0_10px_rgba(13,242,158,0.4)] md:text-[22px]">
             GoFundMe
           </span>
         </Link>
@@ -64,15 +64,6 @@ export default function Navbar() {
             className="hidden font-medium text-white/70 hover:text-white md:inline-flex"
           >
             Sign in
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-[#0df29e]/40 bg-[#0df29e]/10 px-5 text-[15px] font-semibold text-[#0df29e] hover:bg-[#0df29e]/20 hover:border-[#0df29e]/60 neon-glow"
-          >
-            Start a GoFundMe
-          </Link>
-          <Link to="/" className="text-[15px] font-medium text-white/70 hover:text-white md:hidden">
-            Menu
           </Link>
         </div>
       </nav>

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useCommunity } from "@/lib/api";
 import { metrics } from "@/lib/metrics";
 import { useTrackVisibility, useScrollDepth } from "@/hooks/useMetrics";
@@ -9,7 +9,7 @@ import CommunitySidebar from "@/components/community/CommunitySidebar";
 
 export default function CommunityPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { data: community, isLoading } = useCommunity(slug ?? "");
+  const { data: community, isLoading, isError } = useCommunity(slug ?? "");
 
   const campaignsRef = useTrackVisibility("community_campaigns");
   useScrollDepth();
@@ -17,6 +17,10 @@ export default function CommunityPage() {
   useEffect(() => {
     metrics.trackWebVitals();
   }, []);
+
+  if (isError) {
+    return <Navigate to="/" replace />;
+  }
 
   if (isLoading || !community) {
     return (

@@ -1,14 +1,15 @@
 "use client";
 
-import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
+import { useParams, Link, Navigate } from "react-router-dom";
 import {
-  ChevronDown,
-  Ellipsis,
+  ChevronRight,
   Heart,
   Leaf,
   MessageCircle,
   Palette,
   PawPrint,
+  Send,
   Share2,
   Sparkles,
 } from "lucide-react";
@@ -24,7 +25,15 @@ const causeIcons = {
   leaf: Leaf,
 } as const satisfies Record<ProfileCause["icon"], typeof PawPrint>;
 
-function ProfileHero({ profile }: { profile: Profile }) {
+function ProfileHero({
+  profile,
+  following,
+  onFollowToggle,
+}: {
+  profile: Profile;
+  following: boolean;
+  onFollowToggle: () => void;
+}) {
   return (
     <section className="relative overflow-hidden rounded-[28px] glass">
       {/* Dynamic gradient background */}
@@ -60,16 +69,16 @@ function ProfileHero({ profile }: { profile: Profile }) {
           <span>{profile.following} following</span>
         </div>
 
-        <div className="mt-5 flex items-center justify-center gap-3">
-          <Button className="h-10 min-w-[104px] rounded-full bg-[#0df29e] text-[#050505] font-semibold hover:bg-[#0df29e]/90 neon-glow sm:min-w-[112px]">
-            Follow
-          </Button>
+        <div className="mt-5 flex items-center justify-center">
           <Button
-            variant="outline"
-            size="icon-sm"
-            className="size-10 rounded-full border-white/12 text-white/50 hover:bg-white/8 hover:text-white"
+            onClick={onFollowToggle}
+            className={`h-10 min-w-[104px] rounded-full font-semibold sm:min-w-[112px] transition-all ${
+              following
+                ? "border border-white/12 bg-white/8 text-white hover:bg-white/12"
+                : "bg-[#0df29e] text-[#050505] hover:bg-[#0df29e]/90 neon-glow"
+            }`}
           >
-            <Ellipsis className="size-4" />
+            {following ? "Following" : "Follow"}
           </Button>
         </div>
       </div>
@@ -77,25 +86,87 @@ function ProfileHero({ profile }: { profile: Profile }) {
   );
 }
 
+const DEMO_NAMES = ["Emma Wilson", "Carlos Rivera", "Priya Sharma"];
+
 function DiscoverPeople({ profile }: { profile: Profile }) {
+  const [expanded, setExpanded] = useState(false);
+  const [followedIds, setFollowedIds] = useState<Set<string>>(new Set());
+
+  function toggleFollow(id: string) {
+    setFollowedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
   return (
-    <section className="pt-2">
-      <div className="flex items-center justify-between gap-4">
+    <section className="pt-2 space-y-4">
+      <button
+        onClick={() => setExpanded((prev) => !prev)}
+        className="flex w-full items-center justify-between gap-4 group"
+      >
         <h2 className="font-display text-[18px] font-semibold text-white">Discover more people</h2>
         <div className="flex items-center gap-4">
-          <AvatarGroup className="*:data-[slot=avatar]:size-10 *:data-[slot=avatar]:border-2 *:data-[slot=avatar]:border-[#050505]">
-            {profile.discoverPeople.map((person) => (
-              <Avatar key={person.id}>
-                <AvatarImage src={person.avatarUrl} alt="" />
-                <AvatarFallback className="bg-white/8 text-white/50">?</AvatarFallback>
-              </Avatar>
-            ))}
-          </AvatarGroup>
-          <button className="text-white/30 hover:text-white">
-            <ChevronDown className="size-5" />
-          </button>
+          {!expanded && (
+            <AvatarGroup className="*:data-[slot=avatar]:size-10 *:data-[slot=avatar]:border-2 *:data-[slot=avatar]:border-[#050505]">
+              {profile.discoverPeople.map((person) => (
+                <Avatar key={person.id}>
+                  <AvatarImage src={person.avatarUrl} alt="" />
+                  <AvatarFallback className="bg-white/8 text-white/50">?</AvatarFallback>
+                </Avatar>
+              ))}
+            </AvatarGroup>
+          )}
+          <ChevronRight
+            className={`size-5 text-white/30 transition-transform group-hover:text-white ${
+              expanded ? "rotate-90" : ""
+            }`}
+          />
         </div>
-      </div>
+      </button>
+
+      {expanded && (
+        <div className="space-y-3">
+          {profile.discoverPeople.map((person, i) => {
+            const name = DEMO_NAMES[i] ?? `User ${i + 1}`;
+            const isFollowed = followedIds.has(person.id);
+            return (
+              <div
+                key={person.id}
+                className="flex items-center gap-3 rounded-[20px] border border-white/12 bg-white/5 p-3"
+              >
+                <Link to="/">
+                  <Avatar className="size-11 border border-white/12">
+                    <AvatarImage src={person.avatarUrl} alt={name} />
+                    <AvatarFallback className="bg-white/8 text-white/50">
+                      {name.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                </Link>
+                <Link to="/" className="min-w-0 flex-1">
+                  <p className="text-[15px] font-semibold text-white truncate hover:text-[#0df29e]">
+                    {name}
+                  </p>
+                  <p className="text-[13px] text-white/40">Inspired others to help</p>
+                </Link>
+                <Button
+                  onClick={() => toggleFollow(person.id)}
+                  size="sm"
+                  className={`shrink-0 rounded-full text-[13px] font-semibold transition-all ${
+                    isFollowed
+                      ? "border border-white/12 bg-white/8 text-white hover:bg-white/12"
+                      : "bg-[#0df29e] text-[#050505] hover:bg-[#0df29e]/90"
+                  }`}
+                >
+                  {isFollowed ? "Following" : "Follow"}
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }
@@ -174,28 +245,50 @@ function ActivityItem({
   avatarUrl: string;
   displayName: string;
 }) {
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(activity.reactions);
+  const [showCommentInput, setShowCommentInput] = useState(false);
+  const [comments, setComments] = useState<string[]>([]);
+  const [commentText, setCommentText] = useState("");
+
+  function handleLike() {
+    setLiked((prev) => !prev);
+    setLikeCount((prev) => prev + (liked ? -1 : 1));
+  }
+
+  function handleComment() {
+    const trimmed = commentText.trim();
+    if (!trimmed) return;
+    setComments((prev) => [...prev, trimmed]);
+    setCommentText("");
+  }
+
+  async function handleShare() {
+    const url = `${window.location.origin}/fundraiser/${activity.campaign.slug}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: activity.campaign.title, url });
+      } else {
+        await navigator.clipboard.writeText(url);
+      }
+    } catch {
+      // User cancelled
+    }
+  }
+
   return (
     <article className="space-y-4 rounded-[26px] border border-white/12 bg-white/5 p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <Avatar className="size-11 border border-white/12">
-            <AvatarImage src={avatarUrl} alt={displayName} />
-            <AvatarFallback className="bg-white/8 text-[#0df29e]">
-              {displayName.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="text-[15px] font-semibold text-white">{displayName}</p>
-            <p className="text-[14px] text-white/30">{formatRelativeTime(activity.createdAt)}</p>
-          </div>
+      <div className="flex items-center gap-3">
+        <Avatar className="size-11 border border-white/12">
+          <AvatarImage src={avatarUrl} alt={displayName} />
+          <AvatarFallback className="bg-white/8 text-[#0df29e]">
+            {displayName.charAt(0)}
+          </AvatarFallback>
+        </Avatar>
+        <div>
+          <p className="text-[15px] font-semibold text-white">{displayName}</p>
+          <p className="text-[14px] text-white/30">{formatRelativeTime(activity.createdAt)}</p>
         </div>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          className="size-9 text-white/30 hover:bg-white/8 hover:text-white"
-        >
-          <Ellipsis className="size-4" />
-        </Button>
       </div>
 
       {activity.description ? (
@@ -219,7 +312,7 @@ function ActivityItem({
         </div>
 
         <Link
-          to={`/f/${activity.campaign.slug}`}
+          to={`/fundraiser/${activity.campaign.slug}`}
           className="group block rounded-[22px] border border-white/12 bg-white/5 p-3 hover:border-white/20 hover:bg-white/8"
         >
           <div className="flex gap-3">
@@ -243,27 +336,74 @@ function ActivityItem({
         </Link>
       </div>
 
-      <div className="flex items-center gap-5 text-white/30">
-        <button className="inline-flex items-center gap-2 hover:text-[#FF2E93]">
-          <Heart className="size-4" />
-          {activity.reactions > 0 ? (
-            <span className="text-[14px]">{activity.reactions}</span>
-          ) : null}
+      {/* Action buttons */}
+      <div className="flex h-8 items-center gap-5">
+        <button
+          onClick={handleLike}
+          className={`inline-flex h-8 items-center gap-2 transition-colors ${
+            liked ? "text-[#FF2E93]" : "text-white/30 hover:text-[#FF2E93]"
+          }`}
+        >
+          <Heart className={`size-4 shrink-0 ${liked ? "fill-[#FF2E93]" : ""}`} />
+          <span className="text-[14px] leading-none">{likeCount}</span>
         </button>
-        <button className="inline-flex items-center gap-2 hover:text-white">
+        <button
+          onClick={() => setShowCommentInput((prev) => !prev)}
+          className={`inline-flex h-8 items-center gap-2 transition-colors ${
+            showCommentInput ? "text-white" : "text-white/30 hover:text-white"
+          }`}
+        >
           <MessageCircle className="size-4" />
+          <span className="text-[14px] leading-none">{comments.length}</span>
         </button>
-        <button className="inline-flex items-center gap-2 hover:text-white">
+        <button
+          onClick={handleShare}
+          className="inline-flex h-8 items-center gap-2 text-white/30 hover:text-white transition-colors"
+        >
           <Share2 className="size-4" />
         </button>
       </div>
+
+      {/* Inline comments */}
+      {showCommentInput && (
+        <div className="space-y-3">
+          {comments.map((c, i) => (
+            <div key={i} className="flex items-start gap-2 text-[13px]">
+              <span className="font-semibold text-white">You</span>
+              <span className="text-white/60">{c}</span>
+            </div>
+          ))}
+          <div className="flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-3 py-2 focus-within:border-[#0df29e]/40">
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") handleComment(); }}
+              className="flex-1 bg-transparent text-[13px] text-white outline-none placeholder:text-white/30"
+            />
+            <button
+              onClick={handleComment}
+              disabled={!commentText.trim()}
+              className="text-[#0df29e] transition-opacity disabled:opacity-30"
+            >
+              <Send className="size-4" />
+            </button>
+          </div>
+        </div>
+      )}
     </article>
   );
 }
 
 export default function ProfilePage() {
   const { username } = useParams<{ username: string }>();
-  const { data: profile, isLoading } = useProfile(username ?? "");
+  const { data: profile, isLoading, isError } = useProfile(username ?? "");
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  if (isError) {
+    return <Navigate to="/" replace />;
+  }
 
   if (isLoading || !profile) {
     return (
@@ -278,7 +418,11 @@ export default function ProfilePage() {
 
   return (
     <div className="mx-auto flex w-full max-w-[560px] flex-col gap-9 px-4 pb-16 sm:px-0">
-      <ProfileHero profile={profile} />
+      <ProfileHero
+        profile={profile}
+        following={isFollowing}
+        onFollowToggle={() => setIsFollowing((prev) => !prev)}
+      />
       <DiscoverPeople profile={profile} />
       <TopCauses profile={profile} />
       <Highlights profile={profile} />

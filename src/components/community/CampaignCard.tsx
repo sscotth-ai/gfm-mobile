@@ -17,7 +17,7 @@ export default function CampaignCard({ campaign }: CampaignCardProps) {
 
   return (
     <motion.div initial={fadeUp.initial} animate={fadeUp.animate}>
-      <Link to={`/f/${campaign.slug}`} className="group block">
+      <Link to={`/fundraiser/${campaign.slug}`} className="group block">
         <div className="gfm-card overflow-hidden transition-all hover:shadow-[0_8px_40px_rgba(13,242,158,0.08)] hover:border-white/20">
           <div className="aspect-[16/9] overflow-hidden bg-white/5">
             {imgError ? (

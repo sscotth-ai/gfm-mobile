@@ -49,7 +49,7 @@ export default function Leaderboard({ entries, total }: LeaderboardProps) {
                 {entry.organizerName}
               </Link>
               <Link
-                to={`/f/${entry.campaignSlug}`}
+                to={`/fundraiser/${entry.campaignSlug}`}
                 className="block text-[14px] leading-5 text-white/40 line-clamp-2 hover:text-white/60"
               >
                 {entry.campaignTitle}
