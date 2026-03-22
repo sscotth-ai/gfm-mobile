@@ -27,3 +27,7 @@ dist-ssr
 *.yaml
 *.png
 !public/**
+
+# Playwright test artifacts
+test-results/
+playwright-report/
