@@ -340,12 +340,12 @@ function ActivityItem({
       <div className="flex h-8 items-center gap-5">
         <button
           onClick={handleLike}
-          className={`inline-flex h-8 items-center gap-2 transition-colors ${
+          className={`inline-flex h-8 min-w-[3rem] items-center gap-2 transition-colors ${
             liked ? "text-[#FF2E93]" : "text-white/30 hover:text-[#FF2E93]"
           }`}
         >
           <Heart className={`size-4 shrink-0 ${liked ? "fill-[#FF2E93]" : ""}`} />
-          <span className="text-[14px] leading-none">{likeCount}</span>
+          <span className="text-[14px] leading-none tabular-nums">{likeCount}</span>
         </button>
         <button
           onClick={() => setShowCommentInput((prev) => !prev)}
