@@ -36,6 +36,7 @@ jobs:
       - run: pnpm build
         env:
           VITE_PUBLIC_POSTHOG_KEY: ${{ secrets.VITE_PUBLIC_POSTHOG_KEY }}
+          VITE_PUBLIC_POSTHOG_HOST: ${{ secrets.VITE_PUBLIC_POSTHOG_HOST }}
       - run: cp dist/index.html dist/404.html
 
       - name: Install Playwright browsers
