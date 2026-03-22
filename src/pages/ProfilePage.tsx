@@ -340,7 +340,7 @@ function ActivityItem({
       <div className="flex h-8 items-center gap-5">
         <button
           onClick={handleLike}
-          className={`inline-flex h-8 min-w-[3rem] items-center gap-2 transition-colors ${
+          className={`inline-flex h-8 min-w-[2.25rem] items-center gap-2 transition-colors ${
             liked ? "text-[#FF2E93]" : "text-white/30 hover:text-[#FF2E93]"
           }`}
         >
@@ -349,7 +349,7 @@ function ActivityItem({
         </button>
         <button
           onClick={() => setShowCommentInput((prev) => !prev)}
-          className={`inline-flex h-8 min-w-[3rem] items-center gap-2 transition-colors ${
+          className={`inline-flex h-8 min-w-[2.25rem] items-center gap-2 transition-colors ${
             showCommentInput ? "text-white" : "text-white/30 hover:text-white"
           }`}
         >
