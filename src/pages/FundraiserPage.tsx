@@ -5,6 +5,8 @@ import { Heart, MessageCircle, Share2, ChevronDown } from "lucide-react";
 import { useCampaign } from "@/lib/api";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { easeOut } from "@/lib/animations";
+import { metrics } from "@/lib/metrics";
+import { useTrackVisibility, useScrollDepth } from "@/hooks/useMetrics";
 import CampaignStory from "@/components/fundraiser/CampaignStory";
 import OrganizerCard from "@/components/fundraiser/OrganizerCard";
 import BeneficiaryCard from "@/components/fundraiser/BeneficiaryCard";
@@ -22,6 +24,9 @@ export default function FundraiserPage() {
   const [likeCount, setLikeCount] = useState(0);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [heroBarOpacity, setHeroBarOpacity] = useState(1);
+
+  const belowFoldRef = useTrackVisibility("fundraiser_below_fold");
+  useScrollDepth();
 
   useEffect(() => {
     function handleScroll() {
@@ -136,8 +141,14 @@ export default function FundraiserPage() {
               <button
                 className="group flex flex-col items-center gap-1"
                 onClick={() => {
-                  setLiked((prev) => !prev);
-                  setLikeCount((prev) => prev + (liked ? -1 : 1));
+                  const newState = !liked;
+                  setLiked(newState);
+                  setLikeCount((prev) => prev + (newState ? 1 : -1));
+                  metrics.track("like_toggle", "engagement", {
+                    page: "fundraiser",
+                    action: newState ? "like" : "unlike",
+                    slug: slug ?? "",
+                  });
                 }}
               >
                 <div
@@ -161,7 +172,10 @@ export default function FundraiserPage() {
               {/* Comments — opens drawer */}
               <button
                 className="group flex flex-col items-center gap-1"
-                onClick={() => setCommentsOpen(true)}
+                onClick={() => {
+                  setCommentsOpen(true);
+                  metrics.track("comments_drawer_open", "engagement", { slug: slug ?? "" });
+                }}
               >
                 <div className="glass flex size-12 items-center justify-center rounded-full text-white transition-transform active:scale-90">
                   <MessageCircle className="size-7" />
@@ -183,11 +197,24 @@ export default function FundraiserPage() {
                   try {
                     if (navigator.share) {
                       await navigator.share(shareData);
+                      metrics.track("share", "engagement", {
+                        page: "fundraiser",
+                        method: "native",
+                        slug: slug ?? "",
+                      });
                     } else {
                       await navigator.clipboard.writeText(window.location.href);
+                      metrics.track("share", "engagement", {
+                        page: "fundraiser",
+                        method: "clipboard",
+                        slug: slug ?? "",
+                      });
                     }
                   } catch {
-                    // User cancelled share — ignore
+                    metrics.track("share_cancelled", "engagement", {
+                      page: "fundraiser",
+                      slug: slug ?? "",
+                    });
                   }
                 }}
               >
@@ -204,7 +231,13 @@ export default function FundraiserPage() {
         <div className="absolute bottom-0 left-0 z-20 flex w-full flex-col items-center">
           <div className="flex w-full justify-center bg-gradient-to-t from-black via-black/80 to-transparent px-4 pb-6 pt-4">
             <button
-              onClick={() => setDonateOpen(true)}
+              onClick={() => {
+                setDonateOpen(true);
+                metrics.track("donate_cta_click", "conversion", {
+                  source: "hero",
+                  slug: slug ?? "",
+                });
+              }}
               className="glass group relative flex h-[56px] w-full items-center justify-center gap-2 overflow-hidden rounded-full border border-[#0df29e]/50 shadow-[0_0_15px_rgba(13,242,158,0.2)] transition-all active:scale-[0.98]"
             >
               <div className="absolute inset-0 bg-[#0df29e]/10 transition-colors group-active:bg-[#0df29e]/20" />
@@ -225,7 +258,7 @@ export default function FundraiserPage() {
       </section>
 
       {/* ===== BELOW THE FOLD ===== */}
-      <section className="px-4 pb-20 pt-8 sm:px-6">
+      <section ref={belowFoldRef} className="px-4 pb-20 pt-8 sm:px-6">
         <div className="mx-auto max-w-2xl space-y-8">
           {/* Progress */}
           <div className="space-y-3">
@@ -269,7 +302,10 @@ export default function FundraiserPage() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ duration: 0.3, ease: easeOut }}
-            onClick={() => setDonateOpen(true)}
+            onClick={() => {
+              setDonateOpen(true);
+              metrics.track("donate_cta_click", "conversion", { source: "fab", slug: slug ?? "" });
+            }}
             className="fixed bottom-6 right-4 z-40 flex h-14 items-center gap-2 rounded-full bg-[#0df29e] px-6 font-display text-[15px] font-bold text-[#050505] shadow-[0_0_20px_rgba(13,242,158,0.3)] active:scale-[0.97]"
           >
             <Heart className="size-5" />

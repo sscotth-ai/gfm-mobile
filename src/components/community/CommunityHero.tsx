@@ -6,6 +6,7 @@ import { Check, MapPin, Share2, Users } from "lucide-react";
 import type { Community } from "@/types";
 import { fadeUp } from "@/lib/animations";
 import { formatNumber } from "@/lib/format";
+import { metrics } from "@/lib/metrics";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import CommunityStats from "@/components/community/CommunityStats";
@@ -37,7 +38,13 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
             <img
               src={community.bannerUrl}
               alt="Community Header"
-              onError={() => setBannerError(true)}
+              onError={() => {
+                setBannerError(true);
+                metrics.track("image_load_error", "error", {
+                  component: "CommunityHero",
+                  type: "banner",
+                });
+              }}
               className="absolute inset-0 size-full object-cover"
             />
           )}
@@ -88,7 +95,14 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
           </p>
           <button
             className="mt-2 text-[15px] font-medium text-[#0df29e] hover:text-[#0df29e]/80"
-            onClick={() => setExpanded((value) => !value)}
+            onClick={() => {
+              const newState = !expanded;
+              setExpanded(newState);
+              metrics.track("read_more_toggle", "engagement", {
+                page: "community",
+                action: newState ? "expand" : "collapse",
+              });
+            }}
           >
             {expanded ? "Show less" : "Read more"}
           </button>
@@ -124,8 +138,14 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
                 : "h-10 rounded-full bg-[#0df29e] font-semibold text-[#050505] hover:bg-[#0df29e]/90 neon-glow"
             }
             onClick={() => {
-              setFollowing((prev) => !prev);
-              setFollowerCount((prev) => prev + (following ? -1 : 1));
+              const newState = !following;
+              setFollowing(newState);
+              setFollowerCount((prev) => prev + (newState ? 1 : -1));
+              metrics.track("follow_toggle", "engagement", {
+                page: "community",
+                action: newState ? "follow" : "unfollow",
+                target: community.name,
+              });
             }}
           >
             {following ? "Following" : "Follow"}
@@ -142,11 +162,13 @@ export default function CommunityHero({ community }: CommunityHeroProps) {
               try {
                 if (navigator.share) {
                   await navigator.share(shareData);
+                  metrics.track("share", "engagement", { page: "community", method: "native" });
                 } else {
                   await navigator.clipboard.writeText(window.location.href);
+                  metrics.track("share", "engagement", { page: "community", method: "clipboard" });
                 }
               } catch {
-                // User cancelled share
+                metrics.track("share_cancelled", "engagement", { page: "community" });
               }
             }}
           >

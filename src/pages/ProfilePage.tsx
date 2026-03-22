@@ -14,6 +14,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useProfile } from "@/lib/api";
+import { metrics } from "@/lib/metrics";
+import { useTrackVisibility, useScrollDepth } from "@/hooks/useMetrics";
 import type { Profile, ProfileActivity, ProfileCause } from "@/types";
 import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -71,7 +73,14 @@ function ProfileHero({
 
         <div className="mt-5 flex items-center justify-center">
           <Button
-            onClick={onFollowToggle}
+            onClick={() => {
+              onFollowToggle();
+              metrics.track("follow_toggle", "engagement", {
+                page: "profile",
+                action: following ? "unfollow" : "follow",
+                target: profile.displayName,
+              });
+            }}
             className={`h-10 min-w-[104px] rounded-full font-semibold sm:min-w-[112px] transition-all ${
               following
                 ? "border border-white/12 bg-white/8 text-white hover:bg-white/12"
@@ -93,18 +102,29 @@ function DiscoverPeople({ profile }: { profile: Profile }) {
   const [followedIds, setFollowedIds] = useState<Set<string>>(new Set());
 
   function toggleFollow(id: string) {
+    const wasFollowed = followedIds.has(id);
     setFollowedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
       return next;
     });
+    metrics.track("discover_follow_toggle", "engagement", {
+      action: wasFollowed ? "unfollow" : "follow",
+      targetId: id,
+    });
   }
 
   return (
     <section className="pt-2 space-y-4">
       <button
-        onClick={() => setExpanded((prev) => !prev)}
+        onClick={() => {
+          const newState = !expanded;
+          setExpanded(newState);
+          metrics.track("discover_people_toggle", "engagement", {
+            action: newState ? "expand" : "collapse",
+          });
+        }}
         className="flex w-full items-center justify-between gap-4 group"
       >
         <h2 className="font-display text-[18px] font-semibold text-white">Discover more people</h2>
@@ -252,8 +272,13 @@ function ActivityItem({
   const [commentText, setCommentText] = useState("");
 
   function handleLike() {
-    setLiked((prev) => !prev);
-    setLikeCount((prev) => prev + (liked ? -1 : 1));
+    const newState = !liked;
+    setLiked(newState);
+    setLikeCount((prev) => prev + (newState ? 1 : -1));
+    metrics.track("activity_like_toggle", "engagement", {
+      action: newState ? "like" : "unlike",
+      activityId: activity.id,
+    });
   }
 
   function handleComment() {
@@ -261,6 +286,10 @@ function ActivityItem({
     if (!trimmed) return;
     setComments((prev) => [...prev, trimmed]);
     setCommentText("");
+    metrics.track("activity_comment", "engagement", {
+      activityId: activity.id,
+      length: trimmed.length,
+    });
   }
 
   async function handleShare() {
@@ -268,11 +297,13 @@ function ActivityItem({
     try {
       if (navigator.share) {
         await navigator.share({ title: activity.campaign.title, url });
+        metrics.track("share", "engagement", { page: "profile_activity", method: "native" });
       } else {
         await navigator.clipboard.writeText(url);
+        metrics.track("share", "engagement", { page: "profile_activity", method: "clipboard" });
       }
     } catch {
-      // User cancelled
+      metrics.track("share_cancelled", "engagement", { page: "profile_activity" });
     }
   }
 
@@ -348,7 +379,15 @@ function ActivityItem({
           <span className="text-[14px] leading-none tabular-nums">{likeCount}</span>
         </button>
         <button
-          onClick={() => setShowCommentInput((prev) => !prev)}
+          onClick={() => {
+            const newState = !showCommentInput;
+            setShowCommentInput(newState);
+            if (newState) {
+              metrics.track("activity_comment_input_open", "engagement", {
+                activityId: activity.id,
+              });
+            }
+          }}
           className={`inline-flex h-8 min-w-[2.25rem] items-center gap-2 transition-colors ${
             showCommentInput ? "text-white" : "text-white/30 hover:text-white"
           }`}
@@ -403,6 +442,9 @@ export default function ProfilePage() {
   const { data: profile, isLoading, isError } = useProfile(username ?? "");
   const [isFollowing, setIsFollowing] = useState(false);
 
+  const activityRef = useTrackVisibility("profile_activity");
+  useScrollDepth();
+
   if (isError) {
     return <Navigate to="/" replace />;
   }
@@ -429,7 +471,7 @@ export default function ProfilePage() {
       <TopCauses profile={profile} />
       <Highlights profile={profile} />
 
-      <section className="space-y-4">
+      <section ref={activityRef} className="space-y-4">
         <h2 className="font-display text-[22px] font-semibold text-white">Activity</h2>
         <div className="space-y-4">
           {profile.activity.map((activity) => (

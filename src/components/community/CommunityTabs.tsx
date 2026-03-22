@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import type { Community } from "@/types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { metrics } from "@/lib/metrics";
 import CampaignCard from "@/components/community/CampaignCard";
 
 interface CommunityTabsProps {
@@ -22,7 +23,13 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
     : community.campaigns.slice(0, INITIAL_VISIBLE);
 
   return (
-    <Tabs defaultValue="fundraisers" className="gap-6">
+    <Tabs
+      defaultValue="fundraisers"
+      className="gap-6"
+      onValueChange={(value) => {
+        metrics.track("tab_switch", "engagement", { page: "community", tab: value });
+      }}
+    >
       <TabsList variant="line">
         <TabsTrigger value="fundraisers">Fundraisers ({community.campaigns.length})</TabsTrigger>
         <TabsTrigger value="about">About</TabsTrigger>
@@ -39,7 +46,12 @@ export default function CommunityTabs({ community }: CommunityTabsProps) {
           <div className="mt-6 flex justify-center">
             <Button
               variant="outline"
-              onClick={() => setShowAll(true)}
+              onClick={() => {
+                setShowAll(true);
+                metrics.track("show_more_campaigns", "engagement", {
+                  total: community.campaigns.length,
+                });
+              }}
               className="rounded-full border-white/12 text-white/70 hover:bg-white/8 hover:text-white"
             >
               Show more

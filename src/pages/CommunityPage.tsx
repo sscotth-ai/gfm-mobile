@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { useCommunity } from "@/lib/api";
-import { metrics } from "@/lib/metrics";
 import { useTrackVisibility, useScrollDepth } from "@/hooks/useMetrics";
 import CommunityHero from "@/components/community/CommunityHero";
 import CommunityTabs from "@/components/community/CommunityTabs";
@@ -13,10 +11,6 @@ export default function CommunityPage() {
 
   const campaignsRef = useTrackVisibility("community_campaigns");
   useScrollDepth();
-
-  useEffect(() => {
-    metrics.trackWebVitals();
-  }, []);
 
   if (isError) {
     return <Navigate to="/" replace />;

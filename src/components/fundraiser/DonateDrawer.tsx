@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check, HeartHandshake } from "lucide-react";
 import { formatCurrency } from "@/lib/format";
+import { metrics } from "@/lib/metrics";
 
 const PRESET_AMOUNTS = [10, 25, 50, 100, 250] as const;
 
@@ -15,9 +16,20 @@ export default function DonateDrawer({ open, onOpenChange }: DonateDrawerProps) 
   const [customAmount, setCustomAmount] = useState("");
   const [showCustom, setShowCustom] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const openedAtRef = useRef<number>(0);
 
   useEffect(() => {
-    if (!open) {
+    if (open) {
+      openedAtRef.current = Date.now();
+      metrics.track("donate_drawer_open", "conversion", {});
+    } else {
+      if (openedAtRef.current > 0 && !submitted) {
+        const duration = Date.now() - openedAtRef.current;
+        metrics.track("donate_drawer_abandoned", "conversion", {
+          duration_ms: duration,
+          had_amount: effectiveAmount > 0,
+        });
+      }
       setSelectedAmount(50);
       setCustomAmount("");
       setShowCustom(false);
@@ -47,16 +59,24 @@ export default function DonateDrawer({ open, onOpenChange }: DonateDrawerProps) 
     setShowCustom(false);
     setCustomAmount("");
     setSelectedAmount(amount);
+    metrics.track("donate_amount_select", "conversion", { amount, type: "preset" });
   }
 
   function handleShowCustom() {
     setShowCustom(true);
     setSelectedAmount(0);
+    metrics.track("donate_custom_toggle", "conversion", {});
   }
 
   function handleContinue() {
     if (effectiveAmount > 0) {
       setSubmitted(true);
+      const duration = Date.now() - openedAtRef.current;
+      metrics.track("donate_submitted", "conversion", {
+        amount: effectiveAmount,
+        type: showCustom ? "custom" : "preset",
+        duration_ms: duration,
+      });
     }
   }
 
