@@ -21,10 +21,6 @@ export default function CommentsDrawer({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setComments(initialComments);
-  }, [initialComments]);
-
-  useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
       function onKey(e: KeyboardEvent) {

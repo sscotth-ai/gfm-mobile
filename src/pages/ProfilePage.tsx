@@ -367,8 +367,8 @@ function ActivityItem({
       {/* Inline comments */}
       {showCommentInput && (
         <div className="space-y-3">
-          {comments.map((c, i) => (
-            <div key={i} className="flex items-start gap-2 text-[13px]">
+          {comments.map((c) => (
+            <div key={c} className="flex items-start gap-2 text-[13px]">
               <span className="font-semibold text-white">You</span>
               <span className="text-white/60">{c}</span>
             </div>
